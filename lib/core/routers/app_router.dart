@@ -16,6 +16,7 @@ class AppRouter {
   late final goRouter = GoRouter(
     navigatorKey: navigatorKey,
     observers: [getIt<AppRouterObserver>()],
+    initialLocation: const HomeRoute().location,
     routes: $appRoutes,
   );
 }
