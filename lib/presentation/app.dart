@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:fullstack_fe/core/resources/app_colors.dart';
+import 'package:fullstack_fe/core/resources/injection/injection.dart';
+import 'package:fullstack_fe/core/routers/app_router.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: getIt<AppRouter>().goRouter,
       theme: _buildTheme(),
-      debugShowCheckedModeBanner: false, //debug banner 안 보이게끔
-      home: Container(),
+      debugShowCheckedModeBanner: false,
     );
   }
 
