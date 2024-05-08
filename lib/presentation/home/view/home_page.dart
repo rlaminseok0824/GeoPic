@@ -4,6 +4,7 @@ import 'package:fullstack_fe/core/resources/app_colors.dart';
 import 'package:fullstack_fe/core/resources/injection/injection.dart';
 import 'package:fullstack_fe/presentation/home/bloc/home_bottom_navigation_bar_cubit.dart';
 import 'package:fullstack_fe/presentation/home/view/home_bottom_navigation_bar.dart';
+import 'package:fullstack_fe/presentation/home/view/home_page_view.dart';
 import 'package:go_router/go_router.dart';
 
 class HomePage extends StatefulWidget {
@@ -53,6 +54,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: HomePageView(
+        bottomNavigationBarItems: bottomNavigationBarItems,
+      ),
       bottomNavigationBar: HomeBottomNavigationBar(
         bottomNavigationBarItems: bottomNavigationBarItems,
       ),
