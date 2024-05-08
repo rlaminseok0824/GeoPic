@@ -116,3 +116,5 @@ lib/generated_plugin_registrant.dart
 lib/**/*.g.dart
 lib/**/*.freezed.dart
 lib/**/injection.config.dart
+
+*.env
