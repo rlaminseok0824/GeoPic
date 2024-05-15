@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:fullstack_fe/core/common/location.dart';
+import 'package:fullstack_fe/presentation/map/view/current_position_button.dart';
 import 'package:geolocator/geolocator.dart';
 
 class MapView extends StatefulWidget {
@@ -14,7 +15,15 @@ class _MapViewState extends State<MapView> {
   late final NaverMapController _controller;
   late Position _position;
 
-  final marker = NMarker(id: "test", position: NLatLng(37.5666, 126.979));
+  @override
+  void initState() {
+    super.initState();
+    init();
+  }
+
+  void init() async {
+    _position = await initializePosition();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +36,21 @@ class _MapViewState extends State<MapView> {
             _controller = controller;
           },
         ),
+        Positioned(
+          bottom: 20,
+          right: 20,
+          child: CurrentPositionButton(
+            onPressed: () async {
+              _position = await initializePosition();
+              _controller.updateCamera(
+                NCameraUpdate.withParams(
+                    target: NLatLng(_position.latitude, _position.longitude)),
+              );
+
+              setState(() {});
+            },
+          ),
+        )
       ]),
     );
   }
