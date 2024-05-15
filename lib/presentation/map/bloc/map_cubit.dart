@@ -11,23 +11,26 @@ part 'map_cubit.freezed.dart';
 
 @lazySingleton
 class MapCubit extends Cubit<MapState> {
+  bool isMapReady = false;
   late final NaverMapController _controller;
   late Position _position;
   late final NLocationOverlay _locationOverlay;
   MapCubit() : super(const MapState());
 
   void initMap(NaverMapController controller) async {
-    _controller = controller;
-    _position = await initializePosition();
-    _locationOverlay = _controller.getLocationOverlay();
-    // _locationOverlay
-    //     .setIcon(const NOverlayImage.fromAssetImage('assets/position.png'));
-    _locationOverlay.setIconSize(const Size(100, 100));
-    _controller.setLocationTrackingMode(NLocationTrackingMode.noFollow);
-    emit(MapState.initial(
-        controller: _controller,
-        position: _position,
-        locationOverlay: _locationOverlay));
+    if (!isMapReady) {
+      _controller = controller;
+      _position = await initializePosition();
+      _controller.setLocationTrackingMode(NLocationTrackingMode.noFollow);
+      _locationOverlay = _controller.getLocationOverlay();
+      _locationOverlay.setIconSize(const Size(20, 20));
+      isMapReady = true;
+    }
+
+    _controller.updateCamera(
+      NCameraUpdate.withParams(
+          target: NLatLng(_position.latitude, _position.longitude)),
+    );
   }
 
   void setPosition(Position position) {

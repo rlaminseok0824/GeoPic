@@ -12,7 +12,11 @@ class MapView extends StatefulWidget {
   State<MapView> createState() => _MapViewState();
 }
 
-class _MapViewState extends State<MapView> {
+class _MapViewState extends State<MapView>
+    with AutomaticKeepAliveClientMixin<MapView> {
+  @override
+  bool get wantKeepAlive => true;
+
   void _setCurrentPosition(Position position) {
     context.read<MapCubit>().setPosition(position);
     context.read<MapCubit>().updateCamera();
@@ -20,6 +24,7 @@ class _MapViewState extends State<MapView> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return BlocBuilder<MapCubit, MapState>(builder: (context, state) {
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
