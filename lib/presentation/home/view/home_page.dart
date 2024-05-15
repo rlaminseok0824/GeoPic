@@ -5,6 +5,7 @@ import 'package:fullstack_fe/core/resources/injection/injection.dart';
 import 'package:fullstack_fe/presentation/home/bloc/home_bottom_navigation_bar_cubit.dart';
 import 'package:fullstack_fe/presentation/home/view/home_bottom_navigation_bar.dart';
 import 'package:fullstack_fe/presentation/home/view/home_page_view.dart';
+import 'package:fullstack_fe/presentation/map/view/map_page.dart';
 import 'package:go_router/go_router.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,7 +24,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final bottomNavigationBarItems = [
     HomeBottomNavigationBarItem(
-      page: Container(),
+      page: const MapPage(),
       iconBuilder: (isSelected) => Icon(
         Icons.home,
         size: 40,
