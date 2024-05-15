@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:fullstack_fe/presentation/map/bloc/map_cubit.dart';
 import 'package:fullstack_fe/presentation/map/view/current_position_button.dart';
-import 'package:fullstack_fe/presentation/map/view/map_search_bar.dart';
 import 'package:geolocator/geolocator.dart';
 
 class MapView extends StatefulWidget {

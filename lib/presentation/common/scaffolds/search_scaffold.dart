@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:fullstack_fe/core/resources/app_colors.dart';
 import 'package:fullstack_fe/presentation/map/view/map_search_bar.dart';
 
