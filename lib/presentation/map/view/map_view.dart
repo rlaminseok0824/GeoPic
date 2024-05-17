@@ -35,6 +35,9 @@ class _MapViewState extends State<MapView>
             onMapReady: (controller) {
               context.read<MapCubit>().initMap(controller);
             },
+            onMapTapped: (_, latLng) {
+              context.read<MapCubit>().addMarker(latLng);
+            },
           ),
           Positioned(
             bottom: 20,

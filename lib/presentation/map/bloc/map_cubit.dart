@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:fullstack_fe/core/common/location.dart';
+import 'package:fullstack_fe/core/resources/app_assets.dart';
+import 'package:fullstack_fe/core/resources/app_colors.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -29,7 +31,7 @@ class MapCubit extends Cubit<MapState> {
 
     _controller.updateCamera(
       NCameraUpdate.withParams(
-          target: NLatLng(_position.latitude, _position.longitude)),
+          target: NLatLng(_position.latitude, _position.longitude), zoom: 15.0),
     );
   }
 
@@ -42,5 +44,13 @@ class MapCubit extends Cubit<MapState> {
       NCameraUpdate.withParams(
           target: NLatLng(_position.latitude, _position.longitude)),
     );
+  }
+
+  void addMarker(NLatLng latLng) {
+    const icon = NOverlayImage.fromAssetImage(AppAssets.markerIcon);
+
+    final marker = NMarker(
+        id: 'tap', position: latLng, icon: icon, size: const Size(30, 30));
+    _controller.addOverlay(marker);
   }
 }
