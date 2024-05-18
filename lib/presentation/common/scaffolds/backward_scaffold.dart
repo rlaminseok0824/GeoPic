@@ -21,7 +21,7 @@ class BackwardScaffold extends StatelessWidget {
     final topPadding = MediaQuery.of(context).padding.top;
     return Container(
       margin: EdgeInsets.only(top: topPadding + appBarHeight),
-      child: body,
+      child: SingleChildScrollView(child: body),
     );
   }
 
