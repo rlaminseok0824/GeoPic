@@ -15,11 +15,12 @@ class ArticleRecord with _$ArticleRecord {
     double? longitude,
     @Default([]) List<String> tags,
     String? location,
+    required DateTime date,
   }) = _ArticleRecord;
 
   ArticleRecord._();
 
-  factory ArticleRecord.mock() => ArticleRecord(
+  factory ArticleRecord.mock(DateTime? date) => ArticleRecord(
         username: 'username',
         title: 'title',
         content: 'content',
@@ -28,6 +29,7 @@ class ArticleRecord with _$ArticleRecord {
         longitude: 126.978,
         tags: ['tag1', 'tag2'],
         location: 'Seoul',
+        date: date ?? DateTime.now(),
       );
 
   bool get isUnfinished =>
