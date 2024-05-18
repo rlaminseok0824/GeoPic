@@ -31,7 +31,7 @@ class ArticleRecordPicture extends StatelessWidget {
                   child: Container(
                     height: 290,
                     width: double.infinity,
-                    color: AppColors.greyPrimary,
+                    color: AppColors.secondary,
                     child: BlocBuilder<ArticleRecordCubit, ArticleRecordState>(
                       builder: (context, state) {
                         final picture = state.record.pictureFile;
@@ -56,14 +56,14 @@ Widget _buildPicturePlaceholder() {
       Icon(
         Icons.image_outlined,
         size: 24,
-        color: AppColors.background,
+        color: AppColors.greyPrimary,
       ),
       SizedBox(height: 8),
       Text('사진 또는 영상 추가',
           style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w700,
-            color: AppColors.background,
+            color: AppColors.greyPrimary,
           ))
     ],
   );
