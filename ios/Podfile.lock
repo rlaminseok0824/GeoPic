@@ -5,6 +5,8 @@ PODS:
     - NMapsMap (= 3.17.0)
   - geolocator_apple (1.2.0):
     - Flutter
+  - image_picker_ios (0.0.1):
+    - Flutter
   - NMapsGeometry (1.0.2)
   - NMapsMap (3.17.0):
     - NMapsGeometry
@@ -16,6 +18,7 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_naver_map (from `.symlinks/plugins/flutter_naver_map/ios`)
   - geolocator_apple (from `.symlinks/plugins/geolocator_apple/ios`)
+  - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
 
 SPEC REPOS:
@@ -30,6 +33,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_naver_map/ios"
   geolocator_apple:
     :path: ".symlinks/plugins/geolocator_apple/ios"
+  image_picker_ios:
+    :path: ".symlinks/plugins/image_picker_ios/ios"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
 
@@ -37,10 +42,11 @@ SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_naver_map: b18663bc83c2caaab484c58dccf239a87ebbed1b
   geolocator_apple: 6cbaf322953988e009e5ecb481f07efece75c450
+  image_picker_ios: c560581cceedb403a6ff17f2f816d7fea1421fc1
   NMapsGeometry: 4e02554fa9880ef02ed96b075dc84355d6352479
   NMapsMap: a5b909a31b6f3d27a670f6eb2ddc913c38975474
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
 
 PODFILE CHECKSUM: e5493faad3fc3f6c4525cb64f2dced6c8b8742ad
 
-COCOAPODS: 1.13.0
+COCOAPODS: 1.15.2
