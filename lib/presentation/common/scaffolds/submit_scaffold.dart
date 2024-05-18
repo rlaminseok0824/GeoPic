@@ -33,8 +33,8 @@ class SubmitScaffold extends StatelessWidget {
     final bottomPadding = MediaQuery.of(context).viewPadding.bottom + 24;
     return ClipRect(
         child: Container(
-            padding:
-                EdgeInsets.only(bottom: bottomPadding, left: 24, right: 24),
+            padding: EdgeInsets.only(
+                bottom: bottomPadding, left: 24, right: 24, top: 24),
             child: AppElevatedButton(
               text: '제출',
               onPressed: onSubmit,
