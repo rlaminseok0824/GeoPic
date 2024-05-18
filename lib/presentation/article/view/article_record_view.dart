@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fullstack_fe/presentation/article/view/article_record_picture.dart';
 
 class ArticleRecordView extends StatefulWidget {
   const ArticleRecordView({super.key});
@@ -10,6 +11,8 @@ class ArticleRecordView extends StatefulWidget {
 class _ArticleRecordViewState extends State<ArticleRecordView> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return const Column(
+      children: [ArticleRecordPicture()],
+    );
   }
 }

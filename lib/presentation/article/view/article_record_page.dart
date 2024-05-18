@@ -22,6 +22,5 @@ class _ArticleRecordPageState extends State<ArticleRecordPage> {
       child:
           const BackwardScaffold(body: ArticleRecordView(), appBarHeight: 50),
     );
-    ;
   }
 }

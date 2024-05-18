@@ -1,7 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:image_picker/image_picker.dart';
 
 part 'article_record.freezed.dart';
-part 'article_record.g.dart';
+// part 'article_record.g.dart';
 
 @freezed
 class ArticleRecord with _$ArticleRecord {
@@ -10,6 +11,7 @@ class ArticleRecord with _$ArticleRecord {
     String? username,
     String? title,
     String? content,
+    XFile? pictureFile,
     String? imageUrl,
     double? latitude,
     double? longitude,
@@ -38,6 +40,6 @@ class ArticleRecord with _$ArticleRecord {
       (latitude == null || longitude == null) ||
       (longitude == null || longitude == null);
 
-  factory ArticleRecord.fromJson(Map<String, dynamic> json) =>
-      _$ArticleRecordFromJson(json);
+  // factory ArticleRecord.fromJson(Map<String, dynamic> json) =>
+  //     _$ArticleRecordFromJson(json);
 }
