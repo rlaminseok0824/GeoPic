@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fullstack_fe/presentation/article/view/article_record_page.dart';
 import 'package:fullstack_fe/presentation/home/view/home_page.dart';
 import 'package:go_router/go_router.dart';
 
@@ -21,4 +22,15 @@ class HomeRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) =>
       HomePage.builder(context, state);
+}
+
+@TypedGoRoute<ArticleRecordRoute>(
+  path: ArticleRecordRoute.path,
+)
+class ArticleRecordRoute extends GoRouteData {
+  static const path = '/article-record';
+  const ArticleRecordRoute();
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      ArticleRecordPage.builder(context, state);
 }

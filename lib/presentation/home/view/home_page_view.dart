@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fullstack_fe/core/routers/app_routes.dart';
 import 'package:fullstack_fe/presentation/home/bloc/home_bottom_navigation_bar_cubit.dart';
 import 'package:fullstack_fe/presentation/home/view/home_bottom_navigation_bar.dart';
 
@@ -33,8 +34,13 @@ class _HomePageViewState extends State<HomePageView> {
   Widget build(BuildContext context) {
     return BlocListener<HomeBottomNavigationBarCubit,
         HomeBottomNavigationBarState>(
-      listener: (_, bottomNavigationState) =>
-          _bottomNavigationListener(bottomNavigationState),
+      listener: (context, bottomNavigationState) {
+        if (bottomNavigationState.currentIndex == 1) {
+          const ArticleRecordRoute().push(context);
+        } else {
+          _bottomNavigationListener(bottomNavigationState);
+        }
+      },
       child: _buildPageView(),
     );
   }
