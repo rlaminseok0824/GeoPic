@@ -35,7 +35,7 @@ class ArticleRecord with _$ArticleRecord {
       );
 
   bool get isUnfinished =>
-      (username == null || username!.isEmpty) ||
+      (pictureFile == null && imageUrl == null) ||
       (title == null || title!.isEmpty) ||
       (latitude == null || longitude == null) ||
       (longitude == null || longitude == null);

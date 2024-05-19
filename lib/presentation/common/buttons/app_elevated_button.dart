@@ -31,11 +31,9 @@ class AppElevatedButton extends StatelessWidget {
             height: 48,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-                color: isDisabled ? AppColors.secondary : AppColors.primary,
-                borderRadius: BorderRadius.circular(8),
-                border: isDisabled
-                    ? Border.all(color: AppColors.greyPrimary)
-                    : null),
+              color: isDisabled ? AppColors.secondary : AppColors.primary,
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: isLoading
                 ? const CircularProgressIndicator()
                 : Text(text,
