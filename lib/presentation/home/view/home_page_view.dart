@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fullstack_fe/core/routers/app_routes.dart';
 import 'package:fullstack_fe/presentation/home/bloc/home_bottom_navigation_bar_cubit.dart';
 import 'package:fullstack_fe/presentation/home/view/home_bottom_navigation_bar.dart';
+import 'package:go_router/go_router.dart';
 
 class HomePageView extends StatefulWidget {
   final List<HomeBottomNavigationBarItem> bottomNavigationBarItems;
@@ -36,7 +37,7 @@ class _HomePageViewState extends State<HomePageView> {
         HomeBottomNavigationBarState>(
       listener: (context, bottomNavigationState) {
         if (bottomNavigationState.currentIndex == 1) {
-          const ArticleRecordRoute().push(context);
+          _buildDialog(context);
         } else {
           _bottomNavigationListener(bottomNavigationState);
         }
@@ -55,5 +56,44 @@ class _HomePageViewState extends State<HomePageView> {
           )
           .toList(),
     );
+  }
+
+  Future<void> _buildDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return Center(
+              child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                height: 150,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextButton(
+                      child: const Text('실시간 영상 스트리밍',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold)),
+                      onPressed: () {},
+                    ),
+                    const Divider(),
+                    TextButton(
+                      child: const Text('사진 및 영상 업로드',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold)),
+                      onPressed: () {
+                        context.pop();
+                        const ArticleRecordRoute().push(context);
+                      },
+                    ),
+                  ],
+                )),
+          ));
+        });
   }
 }
