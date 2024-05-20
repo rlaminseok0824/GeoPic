@@ -4,8 +4,9 @@ import 'package:fullstack_fe/core/resources/app_colors.dart';
 class BackwardScaffold extends StatelessWidget {
   final Widget body;
   final double appBarHeight;
+  final Widget? appBar;
   const BackwardScaffold(
-      {super.key, required this.body, required this.appBarHeight});
+      {super.key, required this.body, required this.appBarHeight, this.appBar});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +40,8 @@ class BackwardScaffold extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-              )
+              ),
+              if (appBar != null) appBar!,
             ],
           )),
     );
