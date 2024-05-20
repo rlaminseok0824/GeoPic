@@ -1,28 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:fullstack_fe/core/resources/app_colors.dart';
+import 'package:fullstack_fe/core/routers/app_routes.dart';
 
-class MapSearchBar extends StatefulWidget {
+class MapSearchBar extends StatelessWidget {
   const MapSearchBar({super.key, required this.height});
 
   final double height;
 
   @override
-  State<MapSearchBar> createState() => _MapSearchBarState();
-}
-
-class _MapSearchBarState extends State<MapSearchBar> {
-  final TextEditingController _controller = TextEditingController();
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Container(
-        height: widget.height,
+        height: height,
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         decoration: BoxDecoration(
           color: AppColors.secondary,
@@ -30,19 +18,20 @@ class _MapSearchBarState extends State<MapSearchBar> {
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             const Icon(Icons.search, color: AppColors.secondaryPoint),
             const SizedBox(width: 10),
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: TextField(
-                  controller: _controller,
-                  decoration: const InputDecoration(
-                    hintText: 'Search',
-                    border: InputBorder.none,
-                  ),
-                ),
+              child: GestureDetector(
+                onTap: () {
+                  const SearchRoute().push(context);
+                },
+                child: const Text('Search',
+                    style: TextStyle(
+                        color: AppColors.secondaryPoint,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500)),
               ),
             ),
           ],

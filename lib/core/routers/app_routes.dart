@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fullstack_fe/presentation/article/view/article_record_page.dart';
 import 'package:fullstack_fe/presentation/home/view/home_page.dart';
+import 'package:fullstack_fe/presentation/search/view/search_page.dart';
 import 'package:go_router/go_router.dart';
 
 part 'app_routes.g.dart';
@@ -33,4 +34,15 @@ class ArticleRecordRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) =>
       ArticleRecordPage.builder(context, state);
+}
+
+@TypedGoRoute<SearchRoute>(
+  path: SearchRoute.path,
+)
+class SearchRoute extends GoRouteData {
+  static const path = '/search';
+  const SearchRoute();
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      SearchPage.builder(context, state);
 }
