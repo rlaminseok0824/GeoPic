@@ -17,4 +17,8 @@ class ArticleRecordState with _$ArticleRecordState {
   const factory ArticleRecordState.submitFailed(
     ArticleRecord record,
   ) = _SubmitFailed;
+
+  const factory ArticleRecordState.loaded(
+    ArticleRecord record,
+  ) = _Loaded;
 }

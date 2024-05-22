@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:fullstack_fe/feature/article/models/article_record.dart';
+import 'package:fullstack_fe/feature/search/models/location_info.dart';
 import 'package:injectable/injectable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -12,6 +13,15 @@ class ArticleRecordCubit extends Cubit<ArticleRecordState> {
       : super(ArticleRecordState.initial(ArticleRecord(
           date: DateTime.now(),
         )));
+
+  void load(LocationInfo locationInfo) {
+    update((previous) => previous.copyWith(
+          location: locationInfo.place,
+          latitude: locationInfo.latitude,
+          longitude: locationInfo.longitude,
+        ));
+    emit(ArticleRecordState.loaded(state.record));
+  }
 
   void update(
     ArticleRecord Function(ArticleRecord previous) onUpdate,

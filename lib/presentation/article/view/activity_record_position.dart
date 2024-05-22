@@ -27,12 +27,20 @@ class ArticleRecordPosition extends StatelessWidget {
                   const SizedBox(height: 10),
                   BlocBuilder<ArticleRecordCubit, ArticleRecordState>(
                     builder: (context, state) {
-                      return AppTextArea(
-                          readOnly: true,
-                          onChanged: (value) => context
-                              .read<ArticleRecordCubit>()
-                              .update((previous) => previous.copyWith(
-                                  longitude: double.parse(value))));
+                      return BlocListener<ArticleRecordCubit,
+                          ArticleRecordState>(
+                        listener: (context, state) => state.maybeWhen(
+                            loaded: (_) => true, orElse: () => false),
+                        child: AppTextArea(
+                            readOnly: true,
+                            initialValue: state.record.longitude == null
+                                ? ''
+                                : state.record.longitude.toString(),
+                            onChanged: (value) => context
+                                .read<ArticleRecordCubit>()
+                                .update((previous) => previous.copyWith(
+                                    longitude: double.parse(value)))),
+                      );
                     },
                   )
                 ],
@@ -48,12 +56,20 @@ class ArticleRecordPosition extends StatelessWidget {
                   const SizedBox(height: 10),
                   BlocBuilder<ArticleRecordCubit, ArticleRecordState>(
                     builder: (context, state) {
-                      return AppTextArea(
-                          readOnly: true,
-                          onChanged: (value) => context
-                              .read<ArticleRecordCubit>()
-                              .update((previous) => previous.copyWith(
-                                  latitude: double.parse(value))));
+                      return BlocListener<ArticleRecordCubit,
+                          ArticleRecordState>(
+                        listener: (context, state) => state.maybeWhen(
+                            loaded: (_) => true, orElse: () => false),
+                        child: AppTextArea(
+                            readOnly: true,
+                            initialValue: state.record.latitude == null
+                                ? ''
+                                : state.record.latitude.toString(),
+                            onChanged: (value) => context
+                                .read<ArticleRecordCubit>()
+                                .update((previous) => previous.copyWith(
+                                    latitude: double.parse(value)))),
+                      );
                     },
                   )
                 ],

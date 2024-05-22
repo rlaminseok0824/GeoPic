@@ -1,6 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fullstack_fe/core/resources/app_colors.dart';
+import 'package:fullstack_fe/core/routers/app_routes.dart';
 import 'package:fullstack_fe/presentation/article/bloc/article_record_cubit.dart';
 import 'package:fullstack_fe/presentation/common/text_fields/app_text_area.dart';
 
@@ -18,15 +21,24 @@ class ArticleRecordLocation extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('위치', style: textStyle),
+          GestureDetector(
+              onTap: () => const SearchRoute().push(context).then((result) {
+                    context.read<ArticleRecordCubit>().load(result);
+                  }),
+              child: Text('위치', style: textStyle)),
           const SizedBox(height: 10),
           BlocBuilder<ArticleRecordCubit, ArticleRecordState>(
             builder: (context, state) {
-              return AppTextArea(
-                  onChanged: (value) => context
-                      .read<ArticleRecordCubit>()
-                      .update(
-                          (previous) => previous.copyWith(location: value)));
+              return BlocListener<ArticleRecordCubit, ArticleRecordState>(
+                listener: (context, state) =>
+                    state.maybeWhen(loaded: (_) => true, orElse: () => false),
+                child: AppTextArea(
+                    initialValue: state.record.location ?? '',
+                    onChanged: (value) => context
+                        .read<ArticleRecordCubit>()
+                        .update(
+                            (previous) => previous.copyWith(location: value))),
+              );
             },
           )
         ],
