@@ -49,31 +49,5 @@ class SearchPlaceCards extends StatelessWidget {
           ),
       ],
     );
-
-    // if (locations.isEmpty) {
-    //   return const Center(child: Text('No locations found.'));
-    // }
-    // return Column(
-    //   children: [
-    //     const SizedBox(height: 20),
-    //     for (final location in locations)
-    //       SearchPlaceCard(
-    //         locationInfo: location,
-    //         onPressed: () {
-    //           context.read<SearchRecordCubit>().onPressed(location);
-    //         },
-    //         onDelete: () {
-    //           context.read<SearchRecordCubit>().update(
-    //                 (previous) => previous.copyWith(
-    //                   locations: previous.locations
-    //                       .where((element) => element != location)
-    //                       .toList(),
-    //                 ),
-    //               );
-    //           getIt<SearchStorage>().deleteSearchRecord(location);
-    //         },
-    //       ),
-    //   ],
-    // );
   }
 }

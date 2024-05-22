@@ -4,7 +4,6 @@ import 'package:fullstack_fe/core/resources/injection/injection.dart';
 import 'package:fullstack_fe/presentation/common/scaffolds/backward_scaffold.dart';
 import 'package:fullstack_fe/presentation/search/bloc/search_record_cubit.dart';
 import 'package:fullstack_fe/presentation/search/view/search_bar.dart';
-import 'package:fullstack_fe/presentation/search/view/search_place_card.dart';
 import 'package:fullstack_fe/presentation/search/view/search_place_cards.dart';
 import 'package:go_router/go_router.dart';
 
@@ -27,7 +26,7 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   void _onSubmitSucceed(BuildContext context, SearchRecordState state) {
     state.maybeWhen(
-        submitSucceed: (record) => context.pop(record.locations.first),
+        submitSucceed: (record) => context.pop(record.locations.last),
         orElse: () => null);
   }
 
