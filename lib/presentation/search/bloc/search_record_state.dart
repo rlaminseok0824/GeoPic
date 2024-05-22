@@ -3,14 +3,18 @@ part of 'search_record_cubit.dart';
 @freezed
 class SearchRecordState with _$SearchRecordState {
   const factory SearchRecordState.initial(
-      List<LocationInfo> record, String searchText) = _Initial;
+    SearchRecord reocrd,
+  ) = _Initial;
 
   const factory SearchRecordState.submitting(
-      List<LocationInfo> record, String searchText) = _Submitting;
+    SearchRecord reocrd,
+  ) = _Submitting;
 
   const factory SearchRecordState.submitSucceed(
-      List<LocationInfo> record, String searchText) = _SubmitSucceed;
+    SearchRecord reocrd,
+  ) = _SubmitSucceed;
 
   const factory SearchRecordState.submitFailed(
-      List<LocationInfo> record, String searchText) = _SubmitFailed;
+    SearchRecord reocrd,
+  ) = _SubmitFailed;
 }
