@@ -16,6 +16,14 @@ class AppStorage {
     return _sharedPreferences.get(key);
   }
 
+  List<String>? getLists(String key) {
+    final value = _sharedPreferences.get(key);
+    if (value is List<String>) {
+      return value;
+    }
+    return null;
+  }
+
   void clear() async {
     await _sharedPreferences.clear();
   }
@@ -30,5 +38,9 @@ class AppStorage {
 
   Future<bool> set(String key, data) async {
     return await _sharedPreferences.setString(key, data.toString());
+  }
+
+  Future<bool> setLists(String key, data) async {
+    return await _sharedPreferences.setStringList(key, data);
   }
 }
