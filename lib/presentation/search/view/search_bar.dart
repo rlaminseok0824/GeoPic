@@ -35,17 +35,20 @@ class _MySearchBarState extends State<MySearchBar> {
                   child: BlocBuilder<SearchRecordCubit, SearchRecordState>(
                       builder: (context, state) {
                     return TextField(
-                      decoration: const InputDecoration(
-                        hintText: 'Search',
-                        hintStyle: TextStyle(
-                          color: AppColors.secondaryPoint,
+                        decoration: const InputDecoration(
+                          hintText: 'Search',
+                          hintStyle: TextStyle(
+                            color: AppColors.secondaryPoint,
+                          ),
+                          border: InputBorder.none,
                         ),
-                        border: InputBorder.none,
-                      ),
-                      onChanged: (value) => context
-                          .read<SearchRecordCubit>()
-                          .update((previous) => previous = value),
-                    );
+                        onChanged: (value) => context
+                            .read<SearchRecordCubit>()
+                            .update(
+                                (previous) => previous.copyWith(text: value)),
+                        onSubmitted: (value) {
+                          context.read<SearchRecordCubit>().submit();
+                        });
                   }),
                 ),
               )
