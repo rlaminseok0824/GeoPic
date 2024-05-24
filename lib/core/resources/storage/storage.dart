@@ -17,11 +17,8 @@ class AppStorage {
   }
 
   List<String>? getLists(String key) {
-    final value = _sharedPreferences.get(key);
-    if (value is List<String>) {
-      return value;
-    }
-    return null;
+    final value = _sharedPreferences.getStringList(key);
+    return value;
   }
 
   void clear() async {
