@@ -29,16 +29,13 @@ class ArticleRecordLocation extends StatelessWidget {
           const SizedBox(height: 10),
           BlocBuilder<ArticleRecordCubit, ArticleRecordState>(
             builder: (context, state) {
-              return BlocListener<ArticleRecordCubit, ArticleRecordState>(
-                listener: (context, state) =>
-                    state.maybeWhen(loaded: (_) => true, orElse: () => false),
-                child: AppTextArea(
-                    initialValue: state.record.location ?? '',
-                    onChanged: (value) => context
-                        .read<ArticleRecordCubit>()
-                        .update(
-                            (previous) => previous.copyWith(location: value))),
-              );
+              print('state.record.location: ${state.record.location}');
+              return AppTextArea(
+                  initialValue: state.record.location ?? '',
+                  onChanged: (value) => context
+                      .read<ArticleRecordCubit>()
+                      .update(
+                          (previous) => previous.copyWith(location: value)));
             },
           )
         ],

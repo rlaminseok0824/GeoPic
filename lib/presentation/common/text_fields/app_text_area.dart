@@ -22,6 +22,7 @@ class AppTextArea extends StatefulWidget {
 
 class _AppTextAreaState extends State<AppTextArea> {
   final FocusNode _focusNode = FocusNode();
+  final TextEditingController _controller = TextEditingController();
 
   @override
   void dispose() {
@@ -41,11 +42,12 @@ class _AppTextAreaState extends State<AppTextArea> {
 
   @override
   Widget build(BuildContext context) {
+    _controller.text = widget.initialValue ?? '';
     return TextFormField(
+      controller: _controller,
       maxLines: widget.maxLines,
       minLines: widget.maxLines,
       readOnly: widget.readOnly,
-      initialValue: widget.initialValue,
       cursorColor: Colors.black,
       focusNode: _focusNode,
       onTapOutside: (event) => _focusNode.unfocus(),
