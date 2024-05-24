@@ -50,6 +50,7 @@ dependencies:
   geolocator: ^11.0.0
   image_picker: ^1.1.1
   shared_preferences: ^2.2.3
+  uuid: ^4.4.0
 
 dev_dependencies:
   flutter_test:
