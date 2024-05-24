@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fullstack_fe/core/resources/app_colors.dart';
 import 'package:fullstack_fe/core/resources/injection/injection.dart';
-import 'package:fullstack_fe/core/routers/app_routes.dart';
 import 'package:fullstack_fe/presentation/home/bloc/home_bottom_navigation_bar_cubit.dart';
 import 'package:fullstack_fe/presentation/home/view/home_bottom_navigation_bar.dart';
 import 'package:fullstack_fe/presentation/home/view/home_page_view.dart';
 import 'package:fullstack_fe/presentation/map/view/map_page.dart';
-import 'package:fullstack_fe/presentation/article/view/article_record_page.dart';
+import 'package:fullstack_fe/presentation/profile/view/profile_record_page.dart';
 import 'package:go_router/go_router.dart';
 
 class HomePage extends StatefulWidget {
@@ -44,7 +43,7 @@ class _HomePageState extends State<HomePage> {
       label: 'add',
     ),
     HomeBottomNavigationBarItem(
-      page: Container(),
+      page: const ProfileRecordPage(),
       iconBuilder: (isSelected) => Icon(
         Icons.person_rounded,
         size: 40,
