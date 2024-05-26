@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -11,6 +12,9 @@ abstract class RegisterModule {
 
   @lazySingleton
   ImagePicker get imagePicker => ImagePicker();
+
+  @lazySingleton
+  Dio get dio => Dio();
 
   @lazySingleton
   GlobalKey<NavigatorState> get navigationKey => GlobalKey<NavigatorState>();

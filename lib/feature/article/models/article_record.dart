@@ -1,8 +1,9 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:fullstack_fe/core/common/converter.dart';
 import 'package:image_picker/image_picker.dart';
 
 part 'article_record.freezed.dart';
-// part 'article_record.g.dart';
+part 'article_record.g.dart';
 
 @freezed
 class ArticleRecord with _$ArticleRecord {
@@ -11,7 +12,7 @@ class ArticleRecord with _$ArticleRecord {
     String? username,
     String? title,
     String? content,
-    XFile? pictureFile,
+    @XFileConverter() XFile? pictureFile,
     String? imageUrl,
     double? latitude,
     double? longitude,
@@ -35,11 +36,11 @@ class ArticleRecord with _$ArticleRecord {
       );
 
   bool get isUnfinished =>
-      (pictureFile == null && imageUrl == null) ||
+      (pictureFile == null && pictureFile == null) ||
       (title == null || title!.isEmpty) ||
       (latitude == null || longitude == null) ||
       (longitude == null || longitude == null);
 
-  // factory ArticleRecord.fromJson(Map<String, dynamic> json) =>
-  //     _$ArticleRecordFromJson(json);
+  factory ArticleRecord.fromJson(Map<String, dynamic> json) =>
+      _$ArticleRecordFromJson(json);
 }
