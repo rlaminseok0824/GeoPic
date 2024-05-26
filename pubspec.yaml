@@ -54,6 +54,7 @@ dependencies:
   dio: ^5.4.3+1
   retrofit: ^4.1.0
   dartz: ^0.10.1
+  card_swiper: ^3.0.1
 
 dev_dependencies:
   flutter_test:
@@ -66,7 +67,7 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^3.0.0
   build_runner: ^2.4.9
-  injectable_generator: 2.6.1
+  injectable_generator: ^2.6.1
   json_serializable: ^6.8.0
   go_router_builder: ^2.3.0
   freezed: ^2.5.2
