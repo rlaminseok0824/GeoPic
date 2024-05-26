@@ -61,4 +61,24 @@ class ArticleRepository {
       ));
     }
   }
+
+  Future<Either<List<ArticleRecord>, ApiFailure>> fetchRecords() async {
+    try {
+      final result = await _articleClient.fetchArticles();
+      return left(result);
+    } on DioException catch (e, s) {
+      ErrTrackingService.captureException(
+          ErrTrackingService.captureException(e, stackTrace: s));
+      return right(ApiFailure.serverError(e, message: 'Server fetch error'));
+    } catch (e, s) {
+      ErrTrackingService.captureException(
+        e,
+        stackTrace: s,
+      );
+      return right(ApiFailure.clientError(
+        e,
+        message: 'Client fetch error',
+      ));
+    }
+  }
 }
