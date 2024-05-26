@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:injectable/injectable.dart';
@@ -14,7 +15,7 @@ abstract class RegisterModule {
   ImagePicker get imagePicker => ImagePicker();
 
   @lazySingleton
-  Dio get dio => Dio();
+  Dio get dio => Dio(BaseOptions(baseUrl: dotenv.env['BASE_URL']!));
 
   @lazySingleton
   GlobalKey<NavigatorState> get navigationKey => GlobalKey<NavigatorState>();
