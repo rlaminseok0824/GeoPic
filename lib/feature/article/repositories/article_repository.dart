@@ -1,6 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:fullstack_fe/core/errors/api_failure.dart';
+import 'package:fullstack_fe/core/resources/injection/injection.dart';
+import 'package:fullstack_fe/core/resources/storage/profile_storage.dart';
 import 'package:fullstack_fe/core/services/err_tracking_service.dart';
 import 'package:fullstack_fe/feature/article/datasources/article_client.dart';
 import 'package:fullstack_fe/feature/article/models/article_record.dart';
@@ -13,18 +15,22 @@ class ArticleRepository {
   final ArticleClient _articleClient;
   final PictureClient _pictureClient;
 
-  ArticleRepository(this._articleClient, this._pictureClient);
+  ArticleRepository(
+    this._articleClient,
+    this._pictureClient,
+  );
 
   Future<Either<ArticleRecord, ApiFailure>> createRecord({
     required ArticleRecord record,
   }) async {
-    String imageUrl = '';
+    List<String> pictureUrls = ["string"];
+
     //파일 업로드
     if (record.pictureFile != null) {
       try {
-        final file = await MultipartFile.fromFile(record.pictureFile!.path);
-        final response = await _pictureClient.uploadPictures(pictures: [file]);
-        imageUrl = response.data['url'];
+        final files = [await MultipartFile.fromFile(record.pictureFile!.path)];
+        final response = await _pictureClient.uploadPictures(pictures: files);
+        pictureUrls = List<String>.from(response.data['urls']);
       } on DioException catch (e, s) {
         ErrTrackingService.captureException(
             ErrTrackingService.captureException(e, stackTrace: s));
@@ -41,10 +47,12 @@ class ArticleRepository {
         ));
       }
     }
-
     try {
-      final result = await _articleClient
-          .createRecord(record.copyWith(pictureFile: null, imageUrl: imageUrl));
+      final result = await _articleClient.createRecord(record.copyWith(
+        imageUrl: pictureUrls.firstOrNull,
+        pictureFile: null,
+        username: getIt<ProfileStorage>().profile,
+      ));
       return left(result);
     } on DioException catch (e, s) {
       ErrTrackingService.captureException(
