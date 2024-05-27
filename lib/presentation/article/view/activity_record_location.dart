@@ -29,7 +29,6 @@ class ArticleRecordLocation extends StatelessWidget {
           const SizedBox(height: 10),
           BlocBuilder<ArticleRecordCubit, ArticleRecordState>(
             builder: (context, state) {
-              print('state.record.location: ${state.record.location}');
               return AppTextArea(
                   initialValue: state.record.location ?? '',
                   onChanged: (value) => context

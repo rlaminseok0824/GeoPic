@@ -1,5 +1,8 @@
 import 'package:bloc/bloc.dart';
+import 'package:fullstack_fe/core/resources/injection/injection.dart';
+import 'package:fullstack_fe/core/resources/storage/profile_storage.dart';
 import 'package:fullstack_fe/feature/article/models/article_record.dart';
+import 'package:fullstack_fe/feature/article/repositories/article_repository.dart';
 import 'package:fullstack_fe/feature/search/models/location_info.dart';
 import 'package:injectable/injectable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -9,7 +12,8 @@ part 'article_record_state.dart';
 
 @injectable
 class ArticleRecordCubit extends Cubit<ArticleRecordState> {
-  ArticleRecordCubit()
+  final ArticleRepository _articleRepository;
+  ArticleRecordCubit(this._articleRepository)
       : super(ArticleRecordState.initial(ArticleRecord(
           date: DateTime.now(),
         )));
@@ -41,8 +45,10 @@ class ArticleRecordCubit extends Cubit<ArticleRecordState> {
 
   void submit() async {
     emit(ArticleRecordState.submitting(state.record));
-
-    await Future.delayed(const Duration(seconds: 1));
-    emit(ArticleRecordState.submitSucceed(state.record));
+    final result = await _articleRepository.createRecord(
+        record:
+            state.record.copyWith(username: getIt<ProfileStorage>().profile));
+    return result.fold((l) => emit(ArticleRecordState.submitSucceed(l)),
+        (r) => emit(ArticleRecordState.submitFailed(state.record)));
   }
 }
