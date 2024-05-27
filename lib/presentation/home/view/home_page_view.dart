@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fullstack_fe/core/routers/app_routes.dart';
 import 'package:fullstack_fe/presentation/home/bloc/home_bottom_navigation_bar_cubit.dart';
 import 'package:fullstack_fe/presentation/home/view/home_bottom_navigation_bar.dart';
+import 'package:fullstack_fe/presentation/map/view/article_record_bottom_sheet.dart';
 import 'package:go_router/go_router.dart';
 
 class HomePageView extends StatefulWidget {
@@ -36,8 +37,10 @@ class _HomePageViewState extends State<HomePageView> {
     return BlocListener<HomeBottomNavigationBarCubit,
         HomeBottomNavigationBarState>(
       listener: (context, bottomNavigationState) {
-        if (bottomNavigationState.currentIndex == 1) {
-          _buildDialog(context);
+        if (bottomNavigationState.currentIndex == 2) {
+          _buildDialog(context).then((value) {
+            pageController.jumpToPage(0);
+          });
         } else {
           _bottomNavigationListener(bottomNavigationState);
         }
@@ -88,7 +91,13 @@ class _HomePageViewState extends State<HomePageView> {
                               fontSize: 20, fontWeight: FontWeight.bold)),
                       onPressed: () {
                         context.pop();
-                        const ArticleRecordRoute().push(context);
+                        const ArticleRecordRoute().push(context).then(
+                          (value) {
+                            print(value);
+                            ArticleRecordBottomSheet.show(
+                                context: context, record: value);
+                          },
+                        );
                       },
                     ),
                   ],

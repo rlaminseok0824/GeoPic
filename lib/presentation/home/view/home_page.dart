@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fullstack_fe/core/resources/app_colors.dart';
 import 'package:fullstack_fe/core/resources/injection/injection.dart';
+import 'package:fullstack_fe/presentation/article_view/view/article_view_page.dart';
 import 'package:fullstack_fe/presentation/home/bloc/home_bottom_navigation_bar_cubit.dart';
 import 'package:fullstack_fe/presentation/home/view/home_bottom_navigation_bar.dart';
 import 'package:fullstack_fe/presentation/home/view/home_page_view.dart';
@@ -33,6 +34,11 @@ class _HomePageState extends State<HomePage> {
       ),
       label: 'home',
     ),
+    HomeBottomNavigationBarItem(
+        page: const ArticleViewPage(lat: 0, lng: 0),
+        iconBuilder: (isSelected) => Icon(Icons.filter_sharp,
+            size: 40, color: isSelected ? Colors.white : AppColors.greyPrimary),
+        label: 'view'),
     HomeBottomNavigationBarItem(
       page: Container(),
       iconBuilder: (isSelected) => Icon(
