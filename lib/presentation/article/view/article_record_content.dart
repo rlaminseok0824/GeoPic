@@ -23,6 +23,7 @@ class ArticleRecordContent extends StatelessWidget {
           BlocBuilder<ArticleRecordCubit, ArticleRecordState>(
             builder: (context, state) {
               return AppTextArea(
+                  initialValue: state.record.content ?? '',
                   maxLines: 2,
                   onChanged: (value) => context
                       .read<ArticleRecordCubit>()

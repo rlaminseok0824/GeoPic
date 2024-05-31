@@ -23,6 +23,7 @@ class ArticleRecordTitle extends StatelessWidget {
           BlocBuilder<ArticleRecordCubit, ArticleRecordState>(
             builder: (context, state) {
               return AppTextArea(
+                  initialValue: state.record.title ?? '',
                   onChanged: (value) => context
                       .read<ArticleRecordCubit>()
                       .update((previous) => previous.copyWith(title: value)));
