@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fullstack_fe/presentation/article/view/article_record_page.dart';
 import 'package:fullstack_fe/presentation/article_view/view/article_view_page.dart';
 import 'package:fullstack_fe/presentation/home/view/home_page.dart';
+import 'package:fullstack_fe/presentation/live_stream/view/live_stream_record_page.dart';
 import 'package:fullstack_fe/presentation/search/view/search_page.dart';
 import 'package:go_router/go_router.dart';
 
@@ -63,4 +64,15 @@ class ArticleViewRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) =>
       ArticleViewPage.builder(context, state, lat, lng);
+}
+
+@TypedGoRoute<LiveStreamRecordRoute>(
+  path: LiveStreamRecordRoute.path,
+)
+class LiveStreamRecordRoute extends GoRouteData {
+  static const path = '/live-stream-record';
+  const LiveStreamRecordRoute();
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      LiveStreamRecordPage.builder(context, state);
 }

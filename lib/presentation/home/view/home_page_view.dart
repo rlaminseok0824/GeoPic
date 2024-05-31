@@ -82,7 +82,10 @@ class _HomePageViewState extends State<HomePageView> {
                       child: const Text('실시간 영상 스트리밍',
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold)),
-                      onPressed: () {},
+                      onPressed: () {
+                        context.pop();
+                        const LiveStreamRecordRoute().push(context);
+                      },
                     ),
                     const Divider(),
                     TextButton(
