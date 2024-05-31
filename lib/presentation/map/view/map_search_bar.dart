@@ -31,7 +31,7 @@ class MapSearchBar extends StatelessWidget {
                   onTap: () {
                     const SearchRoute().push(context).then((result) => context
                         .read<MapCubit>()
-                        .addMarker(NLatLng(result.latitude, result.longitude),
+                        .addMarker(NLatLng(result.longitude, result.latitude),
                             type: "hihi"));
                   },
                   child: const Text('Search',

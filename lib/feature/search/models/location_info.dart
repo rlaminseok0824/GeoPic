@@ -1,31 +1,20 @@
 import 'dart:convert';
 
-class LocationInfo {
-  final String place;
-  final double latitude;
-  final double longitude;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  LocationInfo({
-    required this.place,
-    required this.latitude,
-    required this.longitude,
-  });
+part 'location_info.freezed.dart';
+part 'location_info.g.dart';
 
-  factory LocationInfo.fromJson(String jsonString) {
-    final jsonData = json.decode(jsonString);
-    return LocationInfo(
-      place: jsonData['place'],
-      latitude: jsonData['latitude'],
-      longitude: jsonData['longitude'],
-    );
-  }
+@freezed
+class LocationInfo with _$LocationInfo {
+  factory LocationInfo({
+    String? place,
+    required double latitude,
+    required double longitude,
+  }) = _LocationInfo;
 
-  String toJson() {
-    final jsonData = {
-      'place': place,
-      'latitude': latitude,
-      'longitude': longitude,
-    };
-    return json.encode(jsonData);
-  }
+  LocationInfo._();
+
+  factory LocationInfo.fromJson(Map<String, dynamic> json) =>
+      _$LocationInfoFromJson(json);
 }

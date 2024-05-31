@@ -3,6 +3,7 @@ import 'package:fullstack_fe/core/resources/injection/injection.dart';
 import 'package:fullstack_fe/core/resources/storage/search_storage.dart';
 import 'package:fullstack_fe/feature/search/models/location_info.dart';
 import 'package:fullstack_fe/feature/search/models/search_record.dart';
+import 'package:fullstack_fe/feature/search/repositories/search_repository.dart';
 import 'package:injectable/injectable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -11,8 +12,10 @@ part 'search_record_cubit.freezed.dart';
 
 @injectable
 class SearchRecordCubit extends Cubit<SearchRecordState> {
-  SearchRecordCubit()
-      : super(SearchRecordState.initial(SearchRecord(
+  final SearchRepository _searchRepository;
+  SearchRecordCubit(
+    this._searchRepository,
+  ) : super(SearchRecordState.initial(SearchRecord(
           date: DateTime.now(),
           locations: getIt<SearchStorage>().searchRecords ?? [],
         )));
@@ -33,13 +36,16 @@ class SearchRecordCubit extends Cubit<SearchRecordState> {
   void submit() async {
     emit(SearchRecordState.submitting(state.reocrd));
 
-    await Future.delayed(const Duration(seconds: 1));
-    final mock =
-        LocationInfo(place: state.reocrd.text!, longitude: 0, latitude: 0);
-    getIt<SearchStorage>().saveSearchRecord(mock);
-    update((previous) =>
-        previous.copyWith(locations: [...previous.locations, mock]));
-    emit(SearchRecordState.submitSucceed(state.reocrd));
+    final result =
+        await _searchRepository.fetchGeocodes(position: state.reocrd.text!);
+
+    return result.fold((l) {
+      final realLocation = l.copyWith(place: state.reocrd.text);
+      getIt<SearchStorage>().saveSearchRecord(realLocation);
+      update((previous) =>
+          previous.copyWith(locations: [...previous.locations, realLocation]));
+      emit(SearchRecordState.submitSucceed(state.reocrd));
+    }, (r) => emit(SearchRecordState.submitFailed(state.reocrd)));
   }
 
   void onPressed(LocationInfo locationInfo) {
