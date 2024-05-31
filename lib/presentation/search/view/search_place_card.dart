@@ -33,7 +33,7 @@ class SearchPlaceCard extends StatelessWidget {
                 child: GestureDetector(
                   onTap: onPressed,
                   child: Text(
-                    locationInfo.place,
+                    locationInfo.place!,
                     style: const TextStyle(
                         color: Colors.black,
                         fontSize: 18,

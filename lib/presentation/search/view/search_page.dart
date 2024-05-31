@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fullstack_fe/core/resources/injection/injection.dart';
-import 'package:fullstack_fe/core/resources/storage/search_storage.dart';
 import 'package:fullstack_fe/presentation/common/scaffolds/backward_scaffold.dart';
 import 'package:fullstack_fe/presentation/search/bloc/search_record_cubit.dart';
 import 'package:fullstack_fe/presentation/search/view/search_bar.dart';
