@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:fullstack_fe/feature/live_stream/models/live_stream_record.dart';
+import 'package:fullstack_fe/feature/search/models/location_info.dart';
 import 'package:injectable/injectable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -12,6 +13,15 @@ class LiveStreamRecordCubit extends Cubit<LiveStreamRecordState> {
       : super(LiveStreamRecordState.initial(LiveStreamRecord(
           date: DateTime.now(),
         )));
+
+  void load(LocationInfo locationInfo) {
+    update((previous) => previous.copyWith(
+          location: locationInfo.place,
+          latitude: locationInfo.latitude,
+          longitude: locationInfo.longitude,
+        ));
+    emit(LiveStreamRecordState.initial(state.record));
+  }
 
   void update(
     LiveStreamRecord Function(LiveStreamRecord previous) onUpdate,

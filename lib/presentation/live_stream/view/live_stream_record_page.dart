@@ -3,6 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fullstack_fe/core/resources/injection/injection.dart';
 import 'package:fullstack_fe/presentation/common/scaffolds/submit_scaffold.dart';
 import 'package:fullstack_fe/presentation/live_stream/bloc/live_stream_record_cubit.dart';
+import 'package:fullstack_fe/presentation/live_stream/view/live_stream_record_position.dart';
+import 'package:fullstack_fe/presentation/live_stream/view/live_stream_record_title.dart';
+import 'package:fullstack_fe/presentation/live_stream/view/live_stream_record_location.dart';
+import 'package:fullstack_fe/presentation/live_stream/view/live_stream_record_video.dart';
 import 'package:go_router/go_router.dart';
 
 class LiveStreamRecordPage extends StatefulWidget {
@@ -30,7 +34,12 @@ class _ArticleRecordPageState extends State<LiveStreamRecordPage> {
   }
 
   Widget _buildColumn() => const Column(
-        children: [],
+        children: [
+          LiveStreamRecordVideo(),
+          LiveStreamRecordTitle(),
+          LiveStreamRecordLocation(),
+          LiveStreamRecordPosition(),
+        ],
       );
 
   @override
