@@ -15,7 +15,18 @@ abstract class RegisterModule {
   ImagePicker get imagePicker => ImagePicker();
 
   @lazySingleton
-  Dio get dio => Dio(BaseOptions(baseUrl: dotenv.env['BASE_URL']!));
+  Dio get dio => Dio(BaseOptions(baseUrl: dotenv.env['BASE_URL']!))
+    ..interceptors.add(LogInterceptor(
+      request: true,
+      requestHeader: true,
+      requestBody: true,
+      responseHeader: true,
+      responseBody: true,
+      error: true,
+      logPrint: (object) {
+        print(object);
+      },
+    ));
 
   @lazySingleton
   GlobalKey<NavigatorState> get navigationKey => GlobalKey<NavigatorState>();
