@@ -57,6 +57,8 @@ dependencies:
   card_swiper: ^3.0.1
   insta_image_viewer: ^1.0.4
   intl: ^0.19.0
+  web_socket_client: ^0.1.2
+  flutter_webrtc: ^0.9.19
 
 dev_dependencies:
   flutter_test:
