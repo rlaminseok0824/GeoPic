@@ -16,7 +16,7 @@ abstract class ArticleClient {
   @GET('/articles/position')
   Future<List<ArticleRecord>> fetchArticlesByPostion({
     @Query('lat') required double lat,
-    @Query('lng') required double lng,
+    @Query('lon') required double lng,
   });
 
   @GET('/articles/{id}')
