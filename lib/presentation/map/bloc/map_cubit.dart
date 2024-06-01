@@ -74,7 +74,7 @@ class MapCubit extends Cubit<MapState> {
   Future<List<ArticleRecord>?> tapMarker(
     NLatLng latLng,
   ) async {
-    const icon = NOverlayImage.fromAssetImage(AppAssets.markerIcon);
+    const icon = NOverlayImage.fromAssetImage(AppAssets.locationIcon);
 
     final marker = NMarker(
         id: 'tap', position: latLng, icon: icon, size: const Size(30, 30));
