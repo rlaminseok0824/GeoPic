@@ -3,6 +3,7 @@ import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:fullstack_fe/core/common/location.dart';
 import 'package:fullstack_fe/core/resources/app_assets.dart';
 import 'package:fullstack_fe/feature/article/models/article_record.dart';
+import 'package:fullstack_fe/feature/article/repositories/article_repository.dart';
 import 'package:fullstack_fe/feature/live_stream/repositories/live_stream_repository.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:bloc/bloc.dart';
@@ -15,11 +16,13 @@ part 'map_cubit.freezed.dart';
 @lazySingleton
 class MapCubit extends Cubit<MapState> {
   final LiveStreamRepository _liveStreamRepository;
+  final ArticleRepository _articleRepository;
   bool isMapReady = false;
   late final NaverMapController _controller;
   late Position _position;
   late final NLocationOverlay _locationOverlay;
-  MapCubit(this._liveStreamRepository) : super(const MapState());
+  MapCubit(this._liveStreamRepository, this._articleRepository)
+      : super(const MapState());
 
   void initMap(NaverMapController controller) async {
     if (!isMapReady) {
@@ -56,24 +59,47 @@ class MapCubit extends Cubit<MapState> {
     );
   }
 
-  Future<ArticleRecord> addMarker(NLatLng latLng, {String type = 'tap'}) async {
+  Future<List<ArticleRecord>?> _updateMarkersByPosition(NLatLng latLng) async {
+    final results = await _articleRepository.fetchArticlesByPostion(
+        latitude: latLng.latitude, longitude: latLng.longitude);
+
+    return results.fold((l) {
+      for (int i = 0; i < l.length; i++) {
+        addMarker(NLatLng(l[i].latitude!, l[i].longitude!), type: l[i].id!);
+      }
+      return l;
+    }, (r) => null);
+  }
+
+  Future<List<ArticleRecord>?> tapMarker(
+    NLatLng latLng,
+  ) async {
+    const icon = NOverlayImage.fromAssetImage(AppAssets.markerIcon);
+
+    final marker = NMarker(
+        id: 'tap', position: latLng, icon: icon, size: const Size(30, 30));
+    _controller.addOverlay(marker);
+
+    _controller.updateCamera(
+      NCameraUpdate.withParams(
+          target: NLatLng(latLng.latitude, latLng.longitude)),
+    );
+
+    final results = await _updateMarkersByPosition(latLng);
+
+    return results;
+  }
+
+  Future<void> addMarker(NLatLng latLng, {required String type}) async {
     const icon = NOverlayImage.fromAssetImage(AppAssets.markerIcon);
 
     final marker = NMarker(
         id: type, position: latLng, icon: icon, size: const Size(30, 30));
     _controller.addOverlay(marker);
 
-    await _controller.latLngToScreenLocation(latLng).then((value) async {
-      final list = await _controller.pickAll(value, radius: 20);
-      if (list.length > 1) {
-        print('There are ${list.length} markers in the radius of 20');
-      }
-    });
     _controller.updateCamera(
       NCameraUpdate.withParams(
           target: NLatLng(latLng.latitude, latLng.longitude)),
     );
-
-    return ArticleRecord.mock(DateTime.now());
   }
 }

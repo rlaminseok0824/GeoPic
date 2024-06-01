@@ -4,6 +4,7 @@ import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:fullstack_fe/core/resources/app_colors.dart';
 import 'package:fullstack_fe/core/routers/app_routes.dart';
 import 'package:fullstack_fe/presentation/map/bloc/map_cubit.dart';
+import 'package:fullstack_fe/presentation/map/view/article_record_bottom_sheet.dart';
 
 class MapSearchBar extends StatelessWidget {
   const MapSearchBar({super.key, required this.height});
@@ -30,9 +31,14 @@ class MapSearchBar extends StatelessWidget {
                 return GestureDetector(
                   onTap: () {
                     const SearchRoute().push(context).then((result) => context
-                        .read<MapCubit>()
-                        .addMarker(NLatLng(result.longitude, result.latitude),
-                            type: "hihi"));
+                            .read<MapCubit>()
+                            .tapMarker(
+                                NLatLng(result.longitude, result.latitude))
+                            .then((value) {
+                          if (value == null && value!.isEmpty) return;
+                          ArticleRecordBottomSheet.show(
+                              context: context, record: value);
+                        }));
                   },
                   child: const Text('Search',
                       style: TextStyle(

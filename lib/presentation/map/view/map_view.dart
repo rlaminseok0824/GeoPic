@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
+import 'package:fullstack_fe/core/routers/app_routes.dart';
 import 'package:fullstack_fe/presentation/map/bloc/map_cubit.dart';
+import 'package:fullstack_fe/presentation/map/view/article_record_bottom_sheet.dart';
 import 'package:fullstack_fe/presentation/map/view/current_position_button.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -36,7 +38,10 @@ class _MapViewState extends State<MapView>
               context.read<MapCubit>().initMap(controller);
             },
             onMapTapped: (_, latLng) {
-              context.read<MapCubit>().addMarker(latLng);
+              context.read<MapCubit>().tapMarker(latLng).then((value) {
+                if (value == null) return;
+                ArticleRecordBottomSheet.show(context: context, record: value);
+              });
             },
           ),
           Positioned(
