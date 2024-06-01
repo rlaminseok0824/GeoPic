@@ -27,8 +27,9 @@ class ArticleScreen extends StatelessWidget {
         Column(
           children: [
             _buildLocation(record),
-            const SizedBox(height: 24),
+            const SizedBox(height: 12),
             _buildTags(record),
+            const SizedBox(height: 48),
           ],
         )
       ],
@@ -66,8 +67,7 @@ class ArticleScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
-          child: Text(
-              "${record.content!}fdsfdsafsdafdsafdsafdsafdsafdsfdsfdsfsafdsafdsdfdsafdsafdasfdsafdsadfasdgfs kdsglmb kjgn bjknbjnsl",
+          child: Text(record.content!,
               style:
                   const TextStyle(fontSize: 16, fontWeight: FontWeight.normal)),
         ),

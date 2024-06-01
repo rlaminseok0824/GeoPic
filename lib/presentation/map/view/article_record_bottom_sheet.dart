@@ -1,5 +1,6 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
+import 'package:fullstack_fe/core/resources/app_colors.dart';
 import 'package:fullstack_fe/feature/article/models/article_record.dart';
 import 'package:fullstack_fe/presentation/article_view/view/article_screen.dart';
 import 'package:fullstack_fe/presentation/common/bottom_sheet/app_record_bottom_sheet.dart';
@@ -15,8 +16,15 @@ class ArticleRecordBottomSheet {
           context: context,
           height: double.infinity,
           body: SizedBox(
-            height: MediaQuery.of(context).size.height * 0.8,
+            height: MediaQuery.of(context).size.height * 0.85,
             child: Swiper(
+                pagination: const SwiperPagination(
+                  alignment: Alignment.bottomCenter,
+                  builder: DotSwiperPaginationBuilder(
+                    color: Colors.grey,
+                    activeColor: AppColors.primary,
+                  ),
+                ),
                 itemCount: record.length,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
