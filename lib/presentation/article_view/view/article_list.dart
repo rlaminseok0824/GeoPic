@@ -10,29 +10,27 @@ class ArticleList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          padding: const EdgeInsets.all(24),
-          height: MediaQuery.of(context).size.height * 0.8,
-          child: Stack(
-            children: [
-              BlocBuilder<ArticleViewCubit, ArticleViewState>(
-                  builder: (context, state) {
-                return Swiper(
-                  itemBuilder: (context, index) {
-                    return ArticleScreen(
-                      record: state.listArticles[index],
-                    );
-                  },
-                  itemCount: state.listArticles.length,
-                  scrollDirection: Axis.vertical,
-                );
-              }),
-            ],
-          ),
+    return SafeArea(
+      child: Container(
+        padding: const EdgeInsets.all(24),
+        height: MediaQuery.of(context).size.height * 0.8,
+        child: Stack(
+          children: [
+            BlocBuilder<ArticleViewCubit, ArticleViewState>(
+                builder: (context, state) {
+              return Swiper(
+                itemBuilder: (context, index) {
+                  return ArticleScreen(
+                    record: state.listArticles[index],
+                  );
+                },
+                itemCount: state.listArticles.length,
+                scrollDirection: Axis.vertical,
+              );
+            }),
+          ],
         ),
-      ],
+      ),
     );
   }
 }

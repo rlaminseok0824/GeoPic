@@ -145,7 +145,7 @@ class ArticleScreen extends StatelessWidget {
       children: [
         const Text('위도'),
         const SizedBox(width: 8),
-        Text(record.latitude.toString()),
+        Text(record.latitude!.toStringAsFixed(3)),
       ],
     );
   }
@@ -155,7 +155,7 @@ class ArticleScreen extends StatelessWidget {
       children: [
         const Text('경도'),
         const SizedBox(width: 8),
-        Text(record.longitude.toString()),
+        Text(record.longitude!.toStringAsFixed(3)),
       ],
     );
   }

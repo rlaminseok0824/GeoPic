@@ -30,9 +30,8 @@ class _ArticleViewPageState extends State<ArticleViewPage> {
                 getIt<ArticleViewCubit>()..load(widget.lat, widget.lng),
           )
         ],
-        child: const BackwardScaffold(
+        child: const Scaffold(
           body: ArticleList(),
-          appBarHeight: 40,
         ));
   }
 }
