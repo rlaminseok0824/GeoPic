@@ -85,6 +85,8 @@ class MapCubit extends Cubit<MapState> {
           target: NLatLng(latLng.latitude, latLng.longitude)),
     );
 
+    await Future.delayed(const Duration(milliseconds: 500));
+
     final results = await _updateMarkersByPosition(latLng);
 
     return results;
