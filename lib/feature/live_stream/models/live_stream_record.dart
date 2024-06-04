@@ -32,7 +32,6 @@ class LiveStreamRecord with _$LiveStreamRecord {
       );
 
   bool get isUnfinished =>
-      (videoId == null || videoId!.isEmpty) ||
       (title == null || title!.isEmpty) ||
       (latitude == null || longitude == null) ||
       (longitude == null || longitude == null);
