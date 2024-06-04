@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:fullstack_fe/feature/live_stream/models/live_stream_record.dart';
 import 'package:fullstack_fe/feature/search/models/location_info.dart';
+import 'package:fullstack_fe/feature/websocket/repositories/websocket_repository.dart';
 import 'package:injectable/injectable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -9,10 +10,28 @@ part 'live_stream_record_cubit.freezed.dart';
 
 @injectable
 class LiveStreamRecordCubit extends Cubit<LiveStreamRecordState> {
-  LiveStreamRecordCubit()
+  final WebsocketRepository _websocketRepository;
+  final String videoId;
+
+  LiveStreamRecordCubit(this._websocketRepository, {required this.videoId})
       : super(LiveStreamRecordState.initial(LiveStreamRecord(
           date: DateTime.now(),
-        )));
+          videoId: videoId,
+        ))) {
+    // setupWebSocketListener();
+  }
+
+  Future<void> setupWebSocketListener() async {
+    try {
+      await _websocketRepository.connectWebsocket(
+        (message) => print(message),
+        roomId: "123",
+        isBroadcasting: true,
+      );
+    } catch (e) {
+      print(e);
+    }
+  }
 
   void load(LocationInfo locationInfo) {
     update((previous) => previous.copyWith(
