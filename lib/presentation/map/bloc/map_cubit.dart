@@ -17,6 +17,7 @@ part 'map_cubit.freezed.dart';
 class MapCubit extends Cubit<MapState> {
   final LiveStreamRepository _liveStreamRepository;
   final ArticleRepository _articleRepository;
+
   bool isMapReady = false;
   late final NaverMapController _controller;
   late Position _position;
@@ -32,15 +33,18 @@ class MapCubit extends Cubit<MapState> {
       _locationOverlay = _controller.getLocationOverlay();
       _locationOverlay.setIconSize(const Size(20, 20));
       isMapReady = true;
-
-      await _liveStreamRepository.fetchRecords().then((value) async {
-        value.fold((l) {
-          for (int i = 0; i < l.length; i++) {
-            addMarker(NLatLng(l[i].latitude!, l[i].longitude!), type: l[i].id!);
-          }
-        }, (r) => null);
-      });
     }
+
+    await _liveStreamRepository.fetchRecords().then((value) async {
+      value.fold((l) {
+        for (int i = 0; i < l.length; i++) {
+          addMarker(NLatLng(l[i].latitude!, l[i].longitude!), type: l[i].id!);
+        }
+      }, (r) => null);
+    });
+
+    await _updateMarkersByPosition(
+        NLatLng(_position.latitude, _position.longitude));
 
     _controller.updateCamera(
       NCameraUpdate.withParams(
