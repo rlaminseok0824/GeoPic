@@ -35,8 +35,10 @@ class WebsocketClientImpl implements WebsocketClient {
       Function(WebsocketMessage message) onMessageReceived,
       {bool isBroadcasting = false,
       required String roomId}) async {
-    _channel = WebSocketChannel.connect(Uri.parse(
-        "${dotenv.env['WS_URL']!}/ws/$roomId?isBroadcast=$isBroadcasting"));
+    final url = Uri.parse(
+        "${dotenv.env['WS_URL']!}/ws/$roomId?isBroadcast=${isBroadcasting ? 'true' : 'false'}");
+    print(url.toString());
+    _channel = WebSocketChannel.connect(url);
     _channel!.stream.listen((event) {
       Map<String, dynamic> data = jsonDecode(event);
       final message = WebsocketMessage.fromJson(data);
