@@ -2,6 +2,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:fullstack_fe/feature/article/models/article_record.dart';
 import 'package:fullstack_fe/feature/article/repositories/article_repository.dart';
+import 'package:fullstack_fe/feature/live_stream/models/live_stream_record.dart';
+import 'package:fullstack_fe/feature/live_stream/repositories/live_stream_repository.dart';
 import 'package:injectable/injectable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -11,22 +13,36 @@ part 'article_view_state.dart';
 @injectable
 class ArticleViewCubit extends Cubit<ArticleViewState> {
   final ArticleRepository _articleRepository;
-  ArticleViewCubit(this._articleRepository)
+  final LiveStreamRepository _liveStreamRepository;
+  ArticleViewCubit(this._articleRepository, this._liveStreamRepository)
       : super(const ArticleViewState.initial());
 
   Future<void> load(double? latitude, double? longtitude) async {
-    print('load');
     if (latitude == null || longtitude == null) return;
 
-    final result = await _articleRepository.fetchRecords();
-    emit(result.fold((l) {
-      l.add(ArticleRecord.mock(DateTime.now()));
-      return ArticleViewState.loaded(
-          listArticles: l,
-          loadedArticleRecord: ArticleRecord.mock(DateTime.now()));
-    }, (r) {
-      return const ArticleViewState.loadFailed(
-          listArticles: [], message: 'Failed to load articles');
-    }));
+    final articleResult = await _articleRepository.fetchRecords();
+    final livestreamResult = await _liveStreamRepository.fetchRecords();
+
+    final List<ArticleRecord> articleArr = [];
+    final List<LiveStreamRecord> livestreamArr = [];
+    articleResult.fold((l) {
+      articleArr.addAll(l);
+    }, (r) => null);
+
+    livestreamResult.fold((l) {
+      livestreamArr.addAll(l);
+    }, (r) => null);
+    if (articleArr.isEmpty && livestreamArr.isEmpty) {
+      return emit(ArticleViewState.loadFailed(
+          listArticles: articleArr,
+          listLiveStreams: livestreamArr,
+          loadedArticleRecord: null,
+          message: "No data found"));
+    }
+    return emit(ArticleViewState.loaded(
+        listArticles: articleArr,
+        loadedArticleRecord: articleArr.first,
+        listLiveStreams: livestreamArr,
+        currentLocation: NLatLng(latitude, longtitude)));
   }
 }

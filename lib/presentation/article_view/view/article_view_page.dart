@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fullstack_fe/core/resources/injection/injection.dart';
 import 'package:fullstack_fe/presentation/article_view/bloc/article_view_cubit.dart';
 import 'package:fullstack_fe/presentation/article_view/view/article_list.dart';
-import 'package:fullstack_fe/presentation/common/scaffolds/backward_scaffold.dart';
 import 'package:go_router/go_router.dart';
 
 class ArticleViewPage extends StatefulWidget {
@@ -28,7 +27,7 @@ class _ArticleViewPageState extends State<ArticleViewPage> {
           BlocProvider(
             create: (_) =>
                 getIt<ArticleViewCubit>()..load(widget.lat, widget.lng),
-          )
+          ),
         ],
         child: const Scaffold(
           body: ArticleList(),
