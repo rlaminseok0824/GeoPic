@@ -4,7 +4,20 @@
 
 ![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white) 
 
-# Getting Start
+# Getting Star
+t
+## 0. Pre-need
+### - NaverAPI code
+
+you have to make .env file. Add .env file on the root directory
+your .env file should look like this,
+``` .env
+NAVER_CLIENT_ID={YOUR_CLIENT_ID}
+NAVER_CLIENT_SECRET={YOUR_CLIENT_SECRET}
+
+BASE_URL={your backend service url}
+WS_URL={your websocket service url}
+
 ## 1. Install Flutter
 ### macOS
 - you can easily install flutter in macOS
@@ -38,6 +51,35 @@ dart run build_runner build --delete-conflicting-outputs
 ``` bash
 flutter run
 ```
+
+# Existing Error
+---
+There occurs an error when building the code. Therefore, you might need to fix some code of generated file.
+If your code look like this,
+``` dart
+# article_client.g.dart 
+@override
+Future<ArticleRecord> createRecord(ArticleRecord record) async {
+	final _extra = <String, dynamic>{};
+	final queryParameters = <String, dynamic>{};
+	final _headers = <String, dynamic>{};
+	final _data = record;
+```
+
+Change code like below.
+``` dart
+# article_client.g.dart 
+@override
+Future<ArticleRecord> createRecord(ArticleRecord record) async {
+	final _extra = <String, dynamic>{};
+	final queryParameters = <String, dynamic>{};
+	final _headers = <String, dynamic>{};
+	final _data = <String, dynamic>{};
+	_data.addAll(record.toJson());
+```
+
+You also have to change ==**live_stream_client.g.dart**==  createRecord like above.
+
 
 # Project Structure
 - use Bloc Pattern
