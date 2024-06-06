@@ -79,7 +79,7 @@ Future<ArticleRecord> createRecord(ArticleRecord record) async {
 	_data.addAll(record.toJson());
 ```
 
-You also have to change ==**live_stream_client.g.dart**==  createRecord like above.
+You also have to change **live_stream_client.g.dart**  createRecord like above.
 
 
 # Project Structure
