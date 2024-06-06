@@ -13,7 +13,7 @@ brew install flutter
 ```
 ### Others
 - Check below site for install
-![Flutter Install](https://flutter-ko.dev/get-started/install) 
+[Flutter Install](https://flutter-ko.dev/get-started/install) 
 
 ## 2. Clone the repository
 
@@ -44,46 +44,46 @@ flutter run
 📦lib  
  ┣ 📂core  
  ┃ ┣ 📂common  
- ┃ ┃ ┣ 📜converter.dart  # Convert of JsonConverter
- ┃ ┃ ┣ 📜location.dart  # Set initialize location
- ┃ ┃ ┗ 📜logger.dart    # Set up Logger
+ ┃ ┃ ┣ 📜converter.dart  
+ ┃ ┃ ┣ 📜location.dart  
+ ┃ ┃ ┗ 📜logger.dart   
  ┃ ┣ 📂errors  
- ┃ ┃ ┣ 📜api_failure.dart  # Define api_failure
- ┃ ┃ ┗ 📜api_failure.freezed.dart  # created file
+ ┃ ┃ ┣ 📜api_failure.dart 
+ ┃ ┃ ┗ 📜api_failure.freezed.dart  
  ┃ ┣ 📂observers  
- ┃ ┃ ┣ 📜app_router_observer.dart  # logging app_router state
- ┃ ┃ ┗ 📜bloc_observer.dart  # logging bloc state
+ ┃ ┃ ┣ 📜app_router_observer.dart
+ ┃ ┃ ┗ 📜bloc_observer.dart
  ┃ ┣ 📂resources  
  ┃ ┃ ┣ 📂injection  
- ┃ ┃ ┃ ┣ 📜injection.config.dart  # created file
- ┃ ┃ ┃ ┗ 📜injection.dart  # For GetIt Setup
+ ┃ ┃ ┃ ┣ 📜injection.config.dart
+ ┃ ┃ ┃ ┗ 📜injection.dart  
  ┃ ┃ ┣ 📂injection_module  
- ┃ ┃ ┃ ┗ 📜injection_module.dart  # Register module to getIT
+ ┃ ┃ ┃ ┗ 📜injection_module.dart
  ┃ ┃ ┣ 📂storage  
- ┃ ┃ ┃ ┣ 📜profile_storage.dart  # Use for profile => Later for access_token
- ┃ ┃ ┃ ┣ 📜search_storage.dart  # Use for Search Phrase
- ┃ ┃ ┃ ┣ 📜storage.dart # Abstract of SharedPreferences
- ┃ ┃ ┃ ┗ 📜storage_key.dart  # Using Storage Key
- ┃ ┃ ┣ 📜app_assets.dart  # Store assets of app
- ┃ ┃ ┗ 📜app_colors.dart  # Store app colors
+ ┃ ┃ ┃ ┣ 📜profile_storage.dart  
+ ┃ ┃ ┃ ┣ 📜search_storage.dart 
+ ┃ ┃ ┃ ┣ 📜storage.dart 
+ ┃ ┃ ┃ ┗ 📜storage_key.dart  
+ ┃ ┃ ┣ 📜app_assets.dart 
+ ┃ ┃ ┗ 📜app_colors.dart  
  ┃ ┣ 📂routers  
- ┃ ┃ ┣ 📜app_router.dart  # set up app_router
- ┃ ┃ ┣ 📜app_routes.dart  # routes of all pages. You need to make routes for all new pages
- ┃ ┃ ┗ 📜app_routes.g.dart  # created file
+ ┃ ┃ ┣ 📜app_router.dart 
+ ┃ ┃ ┣ 📜app_routes.dart
+ ┃ ┃ ┗ 📜app_routes.g.dart 
  ┃ ┗ 📂services  
- ┃ ┃ ┣ 📜err_tracking_service.dart  # err_tracking
- ┃ ┃ ┗ 📜image_picker_service.dart  # image_picker
+ ┃ ┃ ┣ 📜err_tracking_service.dart  
+ ┃ ┃ ┗ 📜image_picker_service.dart  
  ┣ 📂feature  
  ┃ ┣ 📂article  
  ┃ ┃ ┣ 📂datasources  
- ┃ ┃ ┃ ┣ 📜article_client.dart  # Define API
- ┃ ┃ ┃ ┗ 📜article_client.g.dart  # Created file
+ ┃ ┃ ┃ ┣ 📜article_client.dart  
+ ┃ ┃ ┃ ┗ 📜article_client.g.dart 
  ┃ ┃ ┣ 📂models  
- ┃ ┃ ┃ ┣ 📜article_record.dart  # Set up models using on flutter
- ┃ ┃ ┃ ┣ 📜article_record.freezed.dart  # Created file
- ┃ ┃ ┃ ┗ 📜article_record.g.dart  # Created file
+ ┃ ┃ ┃ ┣ 📜article_record.dart
+ ┃ ┃ ┃ ┣ 📜article_record.freezed.dart
+ ┃ ┃ ┃ ┗ 📜article_record.g.dart  
  ┃ ┃ ┗ 📂repositories  
- ┃ ┃ ┃ ┗ 📜article_repository.dart  # Handling api call on this file
+ ┃ ┃ ┃ ┗ 📜article_repository.dart  
  ┃ ┣ 📂live_stream  
  ┃ ┃ ┣ 📂datasources  
  ┃ ┃ ┣ 📂models  
@@ -101,14 +101,14 @@ flutter run
  ┣ 📂presentation  
  ┃ ┣ 📂article  
  ┃ ┃ ┣ 📂bloc  
- ┃ ┃ ┃ ┣ 📜article_record_cubit.dart  # Define the event of actions
- ┃ ┃ ┃ ┣ 📜article_record_cubit.freezed.dart  # Created file
- ┃ ┃ ┃ ┗ 📜article_record_state.dart  # Define State of the page
+ ┃ ┃ ┃ ┣ 📜article_record_cubit.dart
+ ┃ ┃ ┃ ┣ 📜article_record_cubit.freezed.dart 
+ ┃ ┃ ┃ ┗ 📜article_record_state.dart 
  ┃ ┃ ┗ 📂view  
- ┃ ┃ ┃ ┣ 📜activity_record_location.dart  # Component for the page
+ ┃ ┃ ┃ ┣ 📜activity_record_location.dart  
  ┃ ┃ ┃ ┣ 📜activity_record_position.dart  
  ┃ ┃ ┃ ┣ 📜article_record_content.dart  
- ┃ ┃ ┃ ┣ 📜article_record_page.dart  # Main page to show. Use BlocProvider here.
+ ┃ ┃ ┃ ┣ 📜article_record_page.dart  
  ┃ ┃ ┃ ┣ 📜article_record_picture.dart  
  ┃ ┃ ┃ ┗ 📜article_record_title.dart  
  ┃ ┣ 📂article_view  
