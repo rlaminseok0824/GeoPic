@@ -23,7 +23,7 @@ class ArticleRepository {
   Future<Either<ArticleRecord, ApiFailure>> createRecord({
     required ArticleRecord record,
   }) async {
-    List<String> pictureUrls = ["string"];
+    List<String> pictureUrls = [];
 
     //파일 업로드
     if (record.pictureFile != null) {
