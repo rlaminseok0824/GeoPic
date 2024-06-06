@@ -17,6 +17,7 @@ NAVER_CLIENT_SECRET={YOUR_CLIENT_SECRET}
 
 BASE_URL={your backend service url}
 WS_URL={your websocket service url}
+```
 
 ## 1. Install Flutter
 ### macOS
