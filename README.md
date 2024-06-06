@@ -40,170 +40,115 @@ flutter run
 ```
 
 # Project Structure
-📦lib
- ┣ 📂core
- ┃ ┣ 📂common
- ┃ ┃ ┣ 📜converter.dart
- ┃ ┃ ┣ 📜location.dart
- ┃ ┃ ┗ 📜logger.dart
- ┃ ┣ 📂errors
- ┃ ┃ ┣ 📜api_failure.dart
- ┃ ┃ ┗ 📜api_failure.freezed.dart
- ┃ ┣ 📂observers
- ┃ ┃ ┣ 📜app_router_observer.dart
- ┃ ┃ ┗ 📜bloc_observer.dart
- ┃ ┣ 📂resources
- ┃ ┃ ┣ 📂injection
- ┃ ┃ ┃ ┣ 📜injection.config.dart
- ┃ ┃ ┃ ┗ 📜injection.dart
- ┃ ┃ ┣ 📂injection_module
- ┃ ┃ ┃ ┗ 📜injection_module.dart
- ┃ ┃ ┣ 📂storage
- ┃ ┃ ┃ ┣ 📜profile_storage.dart
- ┃ ┃ ┃ ┣ 📜search_storage.dart
- ┃ ┃ ┃ ┣ 📜storage.dart
- ┃ ┃ ┃ ┗ 📜storage_key.dart
- ┃ ┃ ┣ 📜app_assets.dart
- ┃ ┃ ┗ 📜app_colors.dart
- ┃ ┣ 📂routers
- ┃ ┃ ┣ 📜app_router.dart
- ┃ ┃ ┣ 📜app_routes.dart
- ┃ ┃ ┗ 📜app_routes.g.dart
- ┃ ┗ 📂services
- ┃ ┃ ┣ 📜err_tracking_service.dart
- ┃ ┃ ┗ 📜image_picker_service.dart
- ┣ 📂feature
- ┃ ┣ 📂article
- ┃ ┃ ┣ 📂datasources
- ┃ ┃ ┃ ┣ 📜article_client.dart
- ┃ ┃ ┃ ┗ 📜article_client.g.dart
- ┃ ┃ ┣ 📂models
- ┃ ┃ ┃ ┣ 📜article_record.dart
- ┃ ┃ ┃ ┣ 📜article_record.freezed.dart
- ┃ ┃ ┃ ┗ 📜article_record.g.dart
- ┃ ┃ ┗ 📂repositories
- ┃ ┃ ┃ ┗ 📜article_repository.dart
- ┃ ┣ 📂live_stream
- ┃ ┃ ┣ 📂datasources
- ┃ ┃ ┃ ┣ 📜live_stream_client.dart
- ┃ ┃ ┃ ┗ 📜live_stream_client.g.dart
- ┃ ┃ ┣ 📂models
- ┃ ┃ ┃ ┣ 📜live_stream_record.dart
- ┃ ┃ ┃ ┣ 📜live_stream_record.freezed.dart
- ┃ ┃ ┃ ┗ 📜live_stream_record.g.dart
- ┃ ┃ ┗ 📂repositories
- ┃ ┃ ┃ ┗ 📜live_stream_repository.dart
- ┃ ┣ 📂picture
- ┃ ┃ ┗ 📂datasources
- ┃ ┃ ┃ ┣ 📜picture_client.dart
- ┃ ┃ ┃ ┗ 📜picture_client.g.dart
- ┃ ┣ 📂search
- ┃ ┃ ┣ 📂datasources
- ┃ ┃ ┃ ┣ 📜search_client.dart
- ┃ ┃ ┃ ┗ 📜search_client.g.dart
- ┃ ┃ ┣ 📂models
- ┃ ┃ ┃ ┣ 📜location_info.dart
- ┃ ┃ ┃ ┣ 📜location_info.freezed.dart
- ┃ ┃ ┃ ┣ 📜location_info.g.dart
- ┃ ┃ ┃ ┣ 📜search_record.dart
- ┃ ┃ ┃ ┗ 📜search_record.freezed.dart
- ┃ ┃ ┗ 📂repositories
- ┃ ┃ ┃ ┗ 📜search_repository.dart
- ┃ ┗ 📂websocket
- ┃ ┃ ┣ 📂datasources
- ┃ ┃ ┃ ┗ 📜websocket_client.dart
- ┃ ┃ ┣ 📂models
- ┃ ┃ ┃ ┣ 📜websocket_model.dart
- ┃ ┃ ┃ ┣ 📜websocket_model.freezed.dart
- ┃ ┃ ┃ ┗ 📜websocket_model.g.dart
- ┃ ┃ ┗ 📂repositories
- ┃ ┃ ┃ ┗ 📜websocket_repository.dart
- ┣ 📂presentation
- ┃ ┣ 📂article
- ┃ ┃ ┣ 📂bloc
- ┃ ┃ ┃ ┣ 📜article_record_cubit.dart
- ┃ ┃ ┃ ┣ 📜article_record_cubit.freezed.dart
- ┃ ┃ ┃ ┗ 📜article_record_state.dart
- ┃ ┃ ┗ 📂view
- ┃ ┃ ┃ ┣ 📜activity_record_location.dart
- ┃ ┃ ┃ ┣ 📜activity_record_position.dart
- ┃ ┃ ┃ ┣ 📜article_record_content.dart
- ┃ ┃ ┃ ┣ 📜article_record_page.dart
- ┃ ┃ ┃ ┣ 📜article_record_picture.dart
- ┃ ┃ ┃ ┗ 📜article_record_title.dart
- ┃ ┣ 📂article_view
- ┃ ┃ ┣ 📂bloc
- ┃ ┃ ┃ ┣ 📜article_view_cubit.dart
- ┃ ┃ ┃ ┣ 📜article_view_cubit.freezed.dart
- ┃ ┃ ┃ ┗ 📜article_view_state.dart
- ┃ ┃ ┗ 📂view
- ┃ ┃ ┃ ┣ 📜article_list.dart
- ┃ ┃ ┃ ┣ 📜article_screen.dart
- ┃ ┃ ┃ ┣ 📜article_view_page.dart
- ┃ ┃ ┃ ┗ 📜livestream_screen.dart
- ┃ ┣ 📂common
- ┃ ┃ ┣ 📂bottom_sheet
- ┃ ┃ ┃ ┗ 📜app_record_bottom_sheet.dart
- ┃ ┃ ┣ 📂buttons
- ┃ ┃ ┃ ┗ 📜app_elevated_button.dart
- ┃ ┃ ┣ 📂scaffolds
- ┃ ┃ ┃ ┣ 📜backward_scaffold.dart
- ┃ ┃ ┃ ┣ 📜search_scaffold.dart
- ┃ ┃ ┃ ┗ 📜submit_scaffold.dart
- ┃ ┃ ┗ 📂text_fields
- ┃ ┃ ┃ ┗ 📜app_text_area.dart
- ┃ ┣ 📂home
- ┃ ┃ ┣ 📂bloc
- ┃ ┃ ┃ ┣ 📜home_bottom_navigation_bar_cubit.dart
- ┃ ┃ ┃ ┣ 📜home_bottom_navigation_bar_cubit.freezed.dart
- ┃ ┃ ┃ ┗ 📜home_bottom_navigation_bar_state.dart
- ┃ ┃ ┗ 📂view
- ┃ ┃ ┃ ┣ 📜home_bottom_navigation_bar.dart
- ┃ ┃ ┃ ┣ 📜home_page.dart
- ┃ ┃ ┃ ┗ 📜home_page_view.dart
- ┃ ┣ 📂live_stream
- ┃ ┃ ┣ 📂bloc
- ┃ ┃ ┃ ┣ 📜live_stream_record_cubit.dart
- ┃ ┃ ┃ ┣ 📜live_stream_record_cubit.freezed.dart
- ┃ ┃ ┃ ┣ 📜live_stream_record_state.dart
- ┃ ┃ ┃ ┣ 📜webrtc_cubit.dart
- ┃ ┃ ┃ ┣ 📜webrtc_cubit.freezed.dart
- ┃ ┃ ┃ ┗ 📜webrtc_state.dart
- ┃ ┃ ┗ 📂view
- ┃ ┃ ┃ ┣ 📜live_stream_broadcast_page.dart
- ┃ ┃ ┃ ┣ 📜live_stream_record_location.dart
- ┃ ┃ ┃ ┣ 📜live_stream_record_page.dart
- ┃ ┃ ┃ ┣ 📜live_stream_record_position.dart
- ┃ ┃ ┃ ┣ 📜live_stream_record_title.dart
- ┃ ┃ ┃ ┗ 📜live_stream_record_video.dart
- ┃ ┣ 📂map
- ┃ ┃ ┣ 📂bloc
- ┃ ┃ ┃ ┣ 📜map_cubit.dart
- ┃ ┃ ┃ ┣ 📜map_cubit.freezed.dart
- ┃ ┃ ┃ ┗ 📜map_state.dart
- ┃ ┃ ┗ 📂view
- ┃ ┃ ┃ ┣ 📜article_record_bottom_sheet.dart
- ┃ ┃ ┃ ┣ 📜current_position_button.dart
- ┃ ┃ ┃ ┣ 📜map_page.dart
- ┃ ┃ ┃ ┣ 📜map_search_bar.dart
- ┃ ┃ ┃ ┗ 📜map_view.dart
- ┃ ┣ 📂profile
- ┃ ┃ ┣ 📂bloc
- ┃ ┃ ┃ ┣ 📜profile_record_cubit.dart
- ┃ ┃ ┃ ┣ 📜profile_record_cubit.freezed.dart
- ┃ ┃ ┃ ┗ 📜profile_record_state.dart
- ┃ ┃ ┗ 📂view
- ┃ ┃ ┃ ┣ 📜profile_record_page.dart
- ┃ ┃ ┃ ┗ 📜profile_record_view.dart
- ┃ ┣ 📂search
- ┃ ┃ ┣ 📂bloc
- ┃ ┃ ┃ ┣ 📜search_record_cubit.dart
- ┃ ┃ ┃ ┣ 📜search_record_cubit.freezed.dart
- ┃ ┃ ┃ ┗ 📜search_record_state.dart
- ┃ ┃ ┗ 📂view
- ┃ ┃ ┃ ┣ 📜search_bar.dart
- ┃ ┃ ┃ ┣ 📜search_page.dart
- ┃ ┃ ┃ ┣ 📜search_place_card.dart
- ┃ ┃ ┃ ┗ 📜search_place_cards.dart
- ┃ ┗ 📜app.dart
+- use Bloc Pattern
+```
+📦lib  
+ ┣ 📂core  
+ ┃ ┣ 📂common  
+ ┃ ┃ ┣ 📜converter.dart  # Convert of JsonConverter  
+ ┃ ┃ ┣ 📜location.dart  # Set initialize location  
+ ┃ ┃ ┗ 📜logger.dart    # Set up Logger  
+ ┃ ┣ 📂errors  
+ ┃ ┃ ┣ 📜api_failure.dart  # Define api_failure   
+ ┃ ┃ ┗ 📜api_failure.freezed.dart  # created file    
+ ┃ ┣ 📂observers  
+ ┃ ┃ ┣ 📜app_router_observer.dart  # logging app_router state  
+ ┃ ┃ ┗ 📜bloc_observer.dart  # logging bloc state   
+ ┃ ┣ 📂resources  
+ ┃ ┃ ┣ 📂injection  
+ ┃ ┃ ┃ ┣ 📜injection.config.dart  # created file  
+ ┃ ┃ ┃ ┗ 📜injection.dart  # For GetIt Setup  
+ ┃ ┃ ┣ 📂injection_module   
+ ┃ ┃ ┃ ┗ 📜injection_module.dart  # Register module to getIT  
+ ┃ ┃ ┣ 📂storage   
+ ┃ ┃ ┃ ┣ 📜profile_storage.dart  # Use for profile => Later for access_token  
+ ┃ ┃ ┃ ┣ 📜search_storage.dart  # Use for Search Phrase  
+ ┃ ┃ ┃ ┣ 📜storage.dart # Abstract of SharedPreferences  
+ ┃ ┃ ┃ ┗ 📜storage_key.dart  # Using Storage Key  
+ ┃ ┃ ┣ 📜app_assets.dart  # Store assets of app  
+ ┃ ┃ ┗ 📜app_colors.dart  # Store app colors  
+ ┃ ┣ 📂routers    
+ ┃ ┃ ┣ 📜app_router.dart  # set up app_router  
+ ┃ ┃ ┣ 📜app_routes.dart  # routes of all pages. You need to make routes for all new pages  
+ ┃ ┃ ┗ 📜app_routes.g.dart  # created file  
+ ┃ ┗ 📂services  
+ ┃ ┃ ┣ 📜err_tracking_service.dart  # err_tracking  
+ ┃ ┃ ┗ 📜image_picker_service.dart  # image_picker  
+ ┣ 📂feature  
+ ┃ ┣ 📂article  
+ ┃ ┃ ┣ 📂datasources  
+ ┃ ┃ ┃ ┣ 📜article_client.dart  # Define API  
+ ┃ ┃ ┃ ┗ 📜article_client.g.dart  # Created file  
+ ┃ ┃ ┣ 📂models  
+ ┃ ┃ ┃ ┣ 📜article_record.dart  # Set up models using on flutter  
+ ┃ ┃ ┃ ┣ 📜article_record.freezed.dart  # Created file  
+ ┃ ┃ ┃ ┗ 📜article_record.g.dart  # Created file  
+ ┃ ┃ ┗ 📂repositories  
+ ┃ ┃ ┃ ┗ 📜article_repository.dart  # Handling api call on this file  
+ ┃ ┣ 📂live_stream  
+ ┃ ┃ ┣ 📂datasources  
+ ┃ ┃ ┣ 📂models  
+ ┃ ┃ ┗ 📂repositories  
+ ┃ ┣ 📂picture  
+ ┃ ┃ ┗ 📂datasources  
+ ┃ ┣ 📂search  
+ ┃ ┃ ┣ 📂datasources  
+ ┃ ┃ ┣ 📂models  
+ ┃ ┃ ┗ 📂repositories  
+ ┃ ┗ 📂websocket  
+ ┃ ┃ ┣ 📂datasources  
+ ┃ ┃ ┣ 📂models  
+ ┃ ┃ ┗ 📂repositories  
+ ┣ 📂presentation  
+ ┃ ┣ 📂article  
+ ┃ ┃ ┣ 📂bloc  
+ ┃ ┃ ┃ ┣ 📜article_record_cubit.dart  # Define the event of actions  
+ ┃ ┃ ┃ ┣ 📜article_record_cubit.freezed.dart  # Created file  
+ ┃ ┃ ┃ ┗ 📜article_record_state.dart  # Define State of the page  
+ ┃ ┃ ┗ 📂view  
+ ┃ ┃ ┃ ┣ 📜activity_record_location.dart  # Component for the page  
+ ┃ ┃ ┃ ┣ 📜activity_record_position.dart   
+ ┃ ┃ ┃ ┣ 📜article_record_content.dart  
+ ┃ ┃ ┃ ┣ 📜article_record_page.dart  # Main page to show. Use BlocProvider here.  
+ ┃ ┃ ┃ ┣ 📜article_record_picture.dart  
+ ┃ ┃ ┃ ┗ 📜article_record_title.dart  
+ ┃ ┣ 📂article_view  
+ ┃ ┃ ┣ 📂bloc  
+ ┃ ┃ ┗ 📂view  
+ ┃ ┣ 📂common  
+ ┃ ┃ ┣ 📂bottom_sheet  
+ ┃ ┃ ┣ 📂buttons  
+ ┃ ┃ ┣ 📂scaffolds  
+ ┃ ┃ ┗ 📂text_fields  
+ ┃ ┣ 📂home  
+ ┃ ┃ ┣ 📂bloc  
+ ┃ ┃ ┃ ┣ 📜home_bottom_navigation_bar_cubit.dart    
+ ┃ ┃ ┃ ┣ 📜home_bottom_navigation_bar_cubit.freezed.dart   
+ ┃ ┃ ┃ ┗ 📜home_bottom_navigation_bar_state.dart   
+ ┃ ┃ ┗ 📂view  
+ ┃ ┃ ┃ ┣ 📜home_bottom_navigation_bar.dart   
+ ┃ ┃ ┃ ┣ 📜home_page.dart   
+ ┃ ┃ ┃ ┗ 📜home_page_view.dart  
+ ┃ ┣ 📂live_stream  
+ ┃ ┃ ┣ 📂bloc  
+ ┃ ┃ ┗ 📂view  
+ ┃ ┣ 📂map  
+ ┃ ┃ ┣ 📂bloc  
+ ┃ ┃ ┃ ┣ 📜map_cubit.dart  
+ ┃ ┃ ┃ ┣ 📜map_cubit.freezed.dart  
+ ┃ ┃ ┃ ┗ 📜map_state.dart  
+ ┃ ┃ ┗ 📂view  
+ ┃ ┃ ┃ ┣ 📜article_record_bottom_sheet.dart  
+ ┃ ┃ ┃ ┣ 📜current_position_button.dart  
+ ┃ ┃ ┃ ┣ 📜map_page.dart  
+ ┃ ┃ ┃ ┣ 📜map_search_bar.dart  
+ ┃ ┃ ┃ ┗ 📜map_view.dart  
+ ┃ ┣ 📂profile  
+ ┃ ┃ ┣ 📂bloc  
+ ┃ ┃ ┗ 📂view  
+ ┃ ┣ 📂search  
+ ┃ ┃ ┣ 📂bloc  
+ ┃ ┃ ┗ 📂view  
+ ┃ ┗ 📜app.dart  
  ┗ 📜main.dart
+ ```
