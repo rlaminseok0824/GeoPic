@@ -15,12 +15,9 @@ class WebRTCCubit extends Cubit<WebrtcState> {
   late RTCPeerConnection _peerConnection;
   final RTCVideoRenderer localRenderer = RTCVideoRenderer();
   bool _isCandidate = false;
-  final String videoId;
+  // final String videoId;
 
-  WebRTCCubit(
-    this._websocketRepository, {
-    required this.videoId,
-  }) : super(const WebrtcState.initial()) {
+  WebRTCCubit(this._websocketRepository) : super(const WebrtcState.initial()) {
     _initialize();
   }
 

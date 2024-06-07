@@ -8,7 +8,7 @@ class LiveStreamRecord with _$LiveStreamRecord {
   factory LiveStreamRecord({
     String? id,
     String? username,
-    String? videoId,
+    String? videoID,
     String? title,
     String? content,
     double? latitude,
@@ -24,6 +24,7 @@ class LiveStreamRecord with _$LiveStreamRecord {
         username: 'username',
         title: 'title',
         content: 'content',
+        videoID: 'videoId',
         latitude: 37.5665,
         longitude: 126.978,
         tags: ['tag1', 'tag2'],

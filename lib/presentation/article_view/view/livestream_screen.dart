@@ -8,6 +8,7 @@ import 'package:fullstack_fe/core/resources/injection/injection.dart';
 import 'package:fullstack_fe/feature/live_stream/models/live_stream_record.dart';
 import 'package:fullstack_fe/feature/websocket/models/websocket_model.dart';
 import 'package:fullstack_fe/feature/websocket/repositories/websocket_repository.dart';
+import 'package:fullstack_fe/presentation/common/buttons/app_elevated_button.dart';
 import 'package:intl/intl.dart';
 
 class LivestreamScreen extends StatefulWidget {
@@ -167,15 +168,28 @@ class _LivestreamScreenState extends State<LivestreamScreen> {
 
   Widget _buildVideos() {
     return Row(
-      children: [
-        ..._remoteRenderers.map((remoteRenderer) {
-          return Container(
-              height: 300,
-              width: 300,
-              color: AppColors.background,
-              child: RTCVideoView(remoteRenderer));
-        }),
-      ],
+      children: _remoteRenderers.isNotEmpty
+          ? _remoteRenderers.map((remoteRenderer) {
+              return Center(
+                child: Container(
+                    height: 250,
+                    width: 300,
+                    color: AppColors.background,
+                    child: RTCVideoView(remoteRenderer)),
+              );
+            }).toList()
+          : [
+              Center(
+                child: Container(
+                  height: 250,
+                  width: 300,
+                  decoration: BoxDecoration(
+                    color: AppColors.greyPrimary,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+              )
+            ],
     );
   }
 
@@ -191,7 +205,7 @@ class _LivestreamScreenState extends State<LivestreamScreen> {
 
   Widget _buildButton(BuildContext context, LiveStreamRecord record) {
     return _isCandidate
-        ? ElevatedButton(
+        ? AppElevatedButton(
             onPressed: () async {
               final lsd = await _peerConnection.getLocalDescription();
               final sendBody = const JsonEncoder()
@@ -203,7 +217,9 @@ class _LivestreamScreenState extends State<LivestreamScreen> {
                   .convert(
                       {'event': 'offer', 'data': base64Str, 'id': "video"}));
             },
-            child: const Text('참여하기'))
+            text: "참여하기",
+            isDisabled: !_isCandidate,
+            isLoading: false)
         : const SizedBox();
   }
 

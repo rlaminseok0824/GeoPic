@@ -23,12 +23,9 @@ class LiveStreamRecordPage extends StatefulWidget {
     final videoId = const Uuid().v4().toString();
 
     return MultiBlocProvider(providers: [
+      BlocProvider(create: (_) => getIt<WebRTCCubit>()),
       BlocProvider(
-          create: (_) => getIt<WebRTCCubit>(
-                param1: videoId,
-              )),
-      BlocProvider(
-        create: (_) => getIt<LiveStreamRecordCubit>(param1: videoId),
+        create: (_) => getIt<LiveStreamRecordCubit>(),
       ),
     ], child: const LiveStreamRecordPage._());
   }
@@ -40,10 +37,11 @@ class LiveStreamRecordPage extends StatefulWidget {
 class _ArticleRecordPageState extends State<LiveStreamRecordPage> {
   void _onSubmit() async {
     context.read<LiveStreamRecordCubit>().submit();
-    await context.read<WebRTCCubit>().sendLocalDescription().then((_) => context
-        .read<LiveStreamRecordCubit>()
-        .update((previous) =>
-            previous.copyWith(videoId: context.read<WebRTCCubit>().videoId)));
+    await context.read<WebRTCCubit>().sendLocalDescription();
+    // .then((_) => context
+    //     .read<LiveStreamRecordCubit>()
+    //     .update((previous) =>
+    //         previous.copyWith(videoId: context.read<WebRTCCubit>().videoId)));
   }
 
   void _onSubmitSucceed(BuildContext context, LiveStreamRecordState state) {

@@ -1,7 +1,9 @@
 import 'package:bloc/bloc.dart';
+import 'package:fullstack_fe/core/resources/injection/injection.dart';
+import 'package:fullstack_fe/core/resources/storage/profile_storage.dart';
 import 'package:fullstack_fe/feature/live_stream/models/live_stream_record.dart';
+import 'package:fullstack_fe/feature/live_stream/repositories/live_stream_repository.dart';
 import 'package:fullstack_fe/feature/search/models/location_info.dart';
-import 'package:fullstack_fe/feature/websocket/repositories/websocket_repository.dart';
 import 'package:injectable/injectable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -10,28 +12,13 @@ part 'live_stream_record_cubit.freezed.dart';
 
 @injectable
 class LiveStreamRecordCubit extends Cubit<LiveStreamRecordState> {
-  final WebsocketRepository _websocketRepository;
-  final String videoId;
+  // final String videoId;
+  final LiveStreamRepository _liveStreamRepository;
 
-  LiveStreamRecordCubit(this._websocketRepository, {required this.videoId})
+  LiveStreamRecordCubit(this._liveStreamRepository)
       : super(LiveStreamRecordState.initial(LiveStreamRecord(
           date: DateTime.now(),
-          videoId: videoId,
-        ))) {
-    // setupWebSocketListener();
-  }
-
-  Future<void> setupWebSocketListener() async {
-    try {
-      await _websocketRepository.connectWebsocket(
-        (message) => print(message),
-        roomId: "123",
-        isBroadcasting: true,
-      );
-    } catch (e) {
-      print(e);
-    }
-  }
+        )));
 
   void load(LocationInfo locationInfo) {
     update((previous) => previous.copyWith(
@@ -52,7 +39,13 @@ class LiveStreamRecordCubit extends Cubit<LiveStreamRecordState> {
   void submit() async {
     emit(LiveStreamRecordState.submitting(state.record));
 
-    await Future.delayed(const Duration(seconds: 1));
-    emit(LiveStreamRecordState.submitSucceed(state.record));
+    final result = await _liveStreamRepository.createRecord(
+        record: state.record.copyWith(
+            videoID: "video",
+            username: getIt<ProfileStorage>().profile,
+            content: "content"));
+
+    return result.fold((l) => emit(LiveStreamRecordState.submitSucceed(l)),
+        (r) => emit(LiveStreamRecordState.submitFailed(state.record)));
   }
 }

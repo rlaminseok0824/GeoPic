@@ -24,14 +24,14 @@ class ArticleRecord with _$ArticleRecord {
   ArticleRecord._();
 
   factory ArticleRecord.mock(DateTime? date) => ArticleRecord(
-        username: 'username',
-        title: 'title',
-        content: 'content',
-        imageUrl: 'https://picsum.photos/200/300',
-        latitude: 37.5665,
-        longitude: 126.978,
-        tags: ['tag1', 'tag2'],
-        location: 'Seoul',
+          username: 'username',
+          title: 'title',
+          content: 'content',
+          imageUrl: 'https://picsum.photos/200/300',
+          latitude: 37.5665,
+          longitude: 126.978,
+          tags: ['tag1', 'tag2'],
+          location: 'Seoul',
         date: date ?? DateTime.now(),
       );
 

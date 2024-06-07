@@ -15,7 +15,7 @@ abstract class LiveStreamClient {
   @GET('/live_streams/')
   Future<List<LiveStreamRecord>> fetchLiveStreams();
 
-  @POST('/live_streams')
+  @POST('/live_streams/')
   Future<LiveStreamRecord> createRecord(@Body() LiveStreamRecord record);
 
   @DELETE('/live_streams/{id}')
