@@ -103,9 +103,9 @@ class MapCubit extends Cubit<MapState> {
         id: type, position: latLng, icon: icon, size: const Size(30, 30));
     _controller.addOverlay(marker);
 
-    _controller.updateCamera(
-      NCameraUpdate.withParams(
-          target: NLatLng(latLng.latitude, latLng.longitude)),
-    );
+    // _controller.updateCamera(
+    //   NCameraUpdate.withParams(
+    //       target: NLatLng(latLng.latitude, latLng.longitude)),
+    // );
   }
 }
